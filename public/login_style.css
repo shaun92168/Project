@@ -1,0 +1,61 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.text {
+	font-family: verdana;
+	color: white;
+	text-align: center;
+}
+
+#title {
+	display: inline-block;
+	width: 100%;
+	background-color: #315EDC;
+	border-bottom: 2px solid #003B7F;
+}
+
+#login {
+	position: absolute;
+	height:50%;
+	width:25%;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	background-color: #315EDC;
+	border-top: 2px solid #97AFC9;
+	border-left: 2px solid #97AFC9;
+	border-bottom: 2px solid #29313A;
+	border-right: 2px solid #29313A;
+}
+
+#usernameEntry {
+	position: absolute;
+	top: 5%;
+	left: 0;
+	right: 0;
+}
+
+#passwordEntry {
+	position: absolute;
+	top: 35%;
+	left: 0;
+	right: 0;
+}
+
+#submitEntry {
+	position: absolute;
+	top: 70%;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+
+#loginForm {
+	position: relative;
+	height: 80%;
+	width: 100%;	
+}

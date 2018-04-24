@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset='utf-8'>
+		<title>Home</title>
+		<link href='home_style.css' rel='stylesheet' type='text/css'/>
+	</head>
+
+	<body>
+		
+		{{> navbar}}
+
+		<div id='logo' class='text'>
+			<div class='logoText'>
+				<h1>Welcome {{username}}</h1>
+			</div>
+		</div>
+
+		<div class='text'>
+			<h3><b>Your Shopping Lists:</b></h3>
+		</div>
+
+		<div>
+			<ul>
+			{{#each lists as |list|}}
+				<form action='/listsPage' method='get'>
+					<il><input class='item' type='submit' value='{{list.name}}'></il>
+				</form>
+			{{else}}
+				<button><a href='/listsPage'>New List</a></button>
+			{{/each}}
+			</ul>
+		</div>
+	</body>
+</html>

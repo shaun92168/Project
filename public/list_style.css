@@ -1,0 +1,43 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+/*For the Navigation bar*/
+	#navBar {
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    background-color: #315EDC;
+		}
+
+	.navBarLeft {
+	    display: block;
+	    color: white;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	   	float: left;
+	}
+	
+	.navBarRight {
+		display: block;
+	    color: white;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+		float: right;
+	}
+
+	.navBarLink:hover {
+	    background-color: #2145AB;
+	}
+
+	#editList {
+		background-color: #073364;
+	}
+
+ul {
+	list-style-type: none;
+}

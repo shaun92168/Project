@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login page</title>
+		<link href='login_style.css' rel='stylesheet' type='text/css' />
+	</head>
+	<body>
+		<div class='text' id='title'>
+			<h1>QuickList</h1>
+		</div>
+		<div id='login'>
+			<div id='loginLogo' class='text'>
+				<h2>Login</h2>
+			</div>
+
+			<form id='loginForm' action="/login" method="post">
+			    <div id='usernameEntry' class='text'>
+			    	Username<br>
+			        <input type="text" name="username" placeholder='Enter your Username' /><br/>
+			    </div>
+			    <div id='passwordEntry' class='text'>
+			    	Password<br>
+			        <input type="password" name="password" placeholder='Enter your password' />
+			    </div>
+			    <div id='submitEntry'>
+			    	<input type="submit" value="Login"/>
+			    </div>
+			</form>
+		</div>
+	</body>
+</html>

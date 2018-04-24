@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>Home</title>
+		<link href='list_style.css' rel='stylesheet' type='text/css'/>
+	</head>
+
+	<body>
+
+		{{> navbar}}
+
+		<div>
+			<button id='newCategory'>New Category</button>
+			<button id='newItem'>New Item</button>
+			<input id='chooseCategory' placeholder='Enter a category'/>
+			<input id='chooseItem' placeholder='Enter an item' />
+			<button id='delCategory'>Delete Category</button>
+			<button id='delItem'>Delete Item</button>
+		</div>
+
+		<div id='categories'>
+			{{#each lists as |list|}}
+					<h3>{{list.name}}</h3>
+				{{#each list.categories as |categories|}}
+					<ul id='{{categories.name}}'><h4>{{categories.name}}</h4>
+					{{#each categories.items}}
+						<li id='{{this}}'>{{this}}</li>
+					{{/each}}
+					</ul>
+				{{/each}}
+			{{/each}}
+		</div>
+
+		<div>
+		</div>
+		<script src='list_js.js'></script>
+	</body>
+	{{navbar}}
+</html>
