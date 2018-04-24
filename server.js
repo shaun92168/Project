@@ -13,6 +13,8 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static(__dirname + '/public'));
 
+// test text
+
 // bodyparser setup
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
