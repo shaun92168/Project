@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.use(bodyParser.json())
 
 // connects to the mongoDB
+
 mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project', function(err, client) {
 	if(err) {
     	console.log(err);
@@ -76,6 +77,13 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
 
   	// Start of website - the login page
   	// problem: should be app.use
+	/**
+	 * This function render the loginPage
+	 * @name loginPage
+	 * @function 
+	 * @param {JSON} request
+	 * @param {JSON} response
+	 */
   	app.get('/loginPage', (request, response) => {
 		response.render('login.hbs')
 	});
@@ -101,5 +109,5 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
 });
 
 app.listen(port, () => {
-	console.log(`Server is up on the port ${port}`);
+	console.log('Server is up on the port ${port}');
 });
