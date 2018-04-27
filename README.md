@@ -8,3 +8,4 @@ Dependencies:
 4. npm install --save handlebars
 5. npm install file-system --save
 6. npm install mongodb --save
+7. npm install -g jsdoc
