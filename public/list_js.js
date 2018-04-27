@@ -28,7 +28,11 @@
 // }
 // doBackgroundRequest('POST', '/add-new-item', dataToSend, whatToDoWhenRequestIsDone);
 
-document.getElementById('newCategory').addEventListener('click', function() {
+
+/**
+ * This function add a new Category to the current list
+ */
+function addCategory() {
 	var categoryName = prompt('Enter a new category name:');
 	var myElem = document.getElementById(categoryName);
 	if (myElem === null) {
@@ -40,9 +44,12 @@ document.getElementById('newCategory').addEventListener('click', function() {
 		newElem.id = categoryName;
 		document.getElementById('categories').appendChild(newElem);
 	}
-});
+}
 
-document.getElementById('newItem').addEventListener('click', function() {
+/**
+ * This function add a new Item in a specific Category
+ */
+function addItem() {
 	var categoryName = document.getElementById('chooseCategory').value
 	var itemName = document.getElementById('chooseItem').value
 	var myCategory = document.getElementById(categoryName)
@@ -81,9 +88,12 @@ document.getElementById('newItem').addEventListener('click', function() {
 			alert('Cant add item!')
 		}
 	}
-});
-
-document.getElementById('delCategory').addEventListener('click', function() {
+}
+ 
+/**
+ * This function delete a specific Category
+ */
+function delCategory() {
 	var categoryName = document.getElementById('chooseCategory').value
 	var myCategory = document.getElementById(categoryName)
 	if (myCategory === null) {
@@ -91,9 +101,12 @@ document.getElementById('delCategory').addEventListener('click', function() {
 	} else { 
 		myCategory.parentNode.removeChild(myCategory);
 	}
-});
+}
 
-document.getElementById('delItem').addEventListener('click', function() {
+/**
+ * This function delete a specific Category
+ */
+function delItem() {
 	var itemName = document.getElementById('chooseItem').value
 	var myItem = document.getElementById(itemName)
 	if (myItem === null) {
@@ -101,4 +114,20 @@ document.getElementById('delItem').addEventListener('click', function() {
 	} else { 
 		myItem.parentNode.removeChild(myItem);
 	}
+}
+
+document.getElementById('newCategory').addEventListener('click', function() {
+	addCategory();
+});
+
+document.getElementById('newItem').addEventListener('click', function() {
+	addItem();
+});
+
+document.getElementById('delCategory').addEventListener('click', function() {
+	delCategory();
+});
+
+document.getElementById('delItem').addEventListener('click', function() {
+	delItem();
 });
