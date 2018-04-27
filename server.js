@@ -91,13 +91,6 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
 
   	// Start of website - the login page
   	// problem: should be app.use
-	/**
-	 * This function render the loginPage
-	 * @name loginPage
-	 * @function 
-	 * @param {JSON} request
-	 * @param {JSON} response
-	 */
   	app.get('/loginPage', (request, response) => {
 		response.render('login.hbs')
 	});
@@ -112,6 +105,15 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
     	})
 	});
 
+    
+    /** User input what grocery items they want and then click a button. 
+    The webpage then requests information from the database, which then response by sending that information back to the webpage. 
+    Next, the requested information is displayed on the webpage. 
+     * @name ListPage
+     * @function
+     * @param {JSON} request
+     * @param {JSON} response
+     */
     // Third page - user edit lists here
 	app.get('/listsPage', (request, response) => {
 		getFile.then((result) => {
