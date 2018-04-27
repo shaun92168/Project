@@ -85,6 +85,11 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
 		}
 	});
 
+	/**
+	 * respond with "ok" when a GET request is made to the add new item
+	 * @name add new item
+	 * @function
+	 */
 	app.post('/add-new-item', function(req, res) {
 		console.log(req.body)
 		res.send('ok')
