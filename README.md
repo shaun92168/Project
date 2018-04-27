@@ -9,3 +9,10 @@ Dependencies:
 5. npm install file-system --save
 6. npm install mongodb --save
 7. npm install -g jsdoc
+
+Merging the main repository to your local repository:
+1. open git bash and move to the correct directory
+2. git fetch upstream
+3. git merge upstream/master
+4. merge any conflicting changes in an editor
+5. git push origin master
