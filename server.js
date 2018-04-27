@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 app.use(bodyParser.json())
 
+
 /** Connects to the mongo Database 
  * @name database
  */
@@ -94,8 +95,16 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
   	app.get('/loginPage', (request, response) => {
 		response.render('login.hbs')
 	});
+    
+    // Second page - login page moves user here
+    /**
+     * This takes the username and go to the home page at home.hbs
+     * @name homePage
+     * @function
+     * @param {JSON} request
+     * @param {JSON} response
+     */
 
-  	// Second page - login page moves user here
     app.get('/homePage', (request, response) => {
     	getFile.then((result) => {
    			response.render('home.hbs', {
