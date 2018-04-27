@@ -109,5 +109,5 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
 });
 
 app.listen(port, () => {
-	console.log('Server is up on the port ${port}');
+	console.log(`Server is up on the port ${port}`);
 });
