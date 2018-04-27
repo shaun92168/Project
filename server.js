@@ -65,6 +65,14 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
 	  res.render('login', {title: 'Login', message: 'You must login'});
 	});
 
+	/**
+	 * @login
+	 * Reads the json file login.json to parse username and password
+	 * @param {string} Username 
+	 * @param {string} Password 
+	 * Sets username and password
+	 * gets and renders the home.hbs file
+	 */
 	app.post('/login', function(req, res) {
 	    var username = req.body.username;
 	    var password = req.body.password;
@@ -85,6 +93,11 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
 		}
 	});
 
+	/**
+	 * respond with "ok" when a GET request is made to the add new item
+	 * @name add new item
+	 * @function
+	 */
 	app.post('/add-new-item', function(req, res) {
 		console.log(req.body)
 		res.send('ok')
@@ -132,6 +145,7 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
 		})
 	})
 });
+
 
 app.listen(port, () => {
 	console.log(`Server is up on the port ${port}`);
