@@ -74,17 +74,17 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
 	 * gets and renders the home.hbs file
 	 */
 	app.post('/login', function(req, res) {
-	    var username = req.body.username;
+	    var email = req.body.email;
 	    var password = req.body.password;
 	    var loginCredentials = JSON.parse(fs.readFileSync('login.json'));
 
-	    if (username == loginCredentials.username && password == loginCredentials.password) {
-	    	app.set('username', username)
+	    if (email == loginCredentials.email && password == loginCredentials.password) {
+	    	app.set('email', email)
 	    	app.set('password', password)
 
 	    	getFile.then((result) => {
 	    		res.render('home.hbs', {
-					username: app.settings.username,
+					email: app.settings.email,
 					lists: result
 	    		})
 			});
@@ -121,7 +121,7 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
     app.get('/homePage', (request, response) => {
     	getFile.then((result) => {
    			response.render('home.hbs', {
-				username: app.settings.username,
+				email: app.settings.email,
 				lists: result
 			});
     	})
