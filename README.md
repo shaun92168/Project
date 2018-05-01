@@ -20,3 +20,7 @@ Merging the main repository to your local repository:
 3. git merge upstream/master
 4. merge any conflicting changes in an editor
 5. git push origin master
+
+Unit Testing:
+1. We are using "Jest" to test our code
+2. npm install --save-dev jest

@@ -62,17 +62,17 @@ MongoClient.connect(url, function(err, client) {
 	 * gets and renders the home.hbs file
 	 */
 	app.post('/login', function(req, res) {
-	    var username = req.body.username;
+	    var email = req.body.email;
 	    var password = req.body.password;
 	    var loginCredentials = JSON.parse(fs.readFileSync('login.json'));
 
-	    if (username == loginCredentials.username && password == loginCredentials.password) {
-	    	app.set('username', username)
+	    if (email == loginCredentials.email && password == loginCredentials.password) {
+	    	app.set('email', email)
 	    	app.set('password', password)
 
 	    	dbf.getFile(collection).then((result) => {
 	    		res.render('home.hbs', {
-					username: app.settings.username,
+					email: app.settings.email,
 					lists: result
 	    		})
 			});
@@ -109,7 +109,7 @@ MongoClient.connect(url, function(err, client) {
     app.get('/homePage', (request, response) => {
     	dbf.getFile(collection).then((result) => {
    			response.render('home.hbs', {
-				username: app.settings.username,
+				email: app.settings.email,
 				lists: result
 			});
     	})
