@@ -15,7 +15,14 @@ function getFile(collection) {
 	})
 }
 
+function createTable(newTable,db) {
+	db.createCollection(newTable, function(err, res) {
+    	if (err) throw err;
+    	console.log("Collection created!");
+  	});
+}
 // put function name to export it
 module.exports = {
-	getFile
+	getFile,
+	createTable
 }
