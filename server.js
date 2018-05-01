@@ -8,7 +8,9 @@ const hbs = require('hbs');
 const fs = require('fs')
 
 /** Mongo Database module */
-const mongodb = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project'
+const dbf = require('./database_functions.js')
 
 /** localhost test port */
 const port = process.env.PORT || 8080;
@@ -31,7 +33,7 @@ app.use(bodyParser.json())
 /** Connects to the mongo Database 
  * @name database
  */
-mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project', function(err, client) {
+MongoClient.connect(url, function(err, client) {
 	if(err) {
     	console.log(err);
   	} else {
@@ -41,20 +43,6 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
   	//setup for DB
   	const db = client.db('grocery_list_project')
   	const collection = db.collection('nick')
-
-  	// loads the users lists from the DB
-  	var getFile = new Promise((resolve, reject) => {
-	  	collection.findOne({name: 'Grocery List'}, function(err, result) {
-	    	if (err) throw err;
-
-	    	if (result == null) {
-	    		console.log('failed to find file')
-	    		reject()
-	    	} else {
-	    		resolve([result])
-	    	}
-	    })
-	});
 
 	/**
 	 * Sends back the html page
@@ -82,7 +70,7 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
 	    	app.set('email', email)
 	    	app.set('password', password)
 
-	    	getFile.then((result) => {
+	    	dbf.getFile(collection).then((result) => {
 	    		res.render('home.hbs', {
 					email: app.settings.email,
 					lists: result
@@ -119,7 +107,7 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
      */
 
     app.get('/homePage', (request, response) => {
-    	getFile.then((result) => {
+    	dbf.getFile(collection).then((result) => {
    			response.render('home.hbs', {
 				email: app.settings.email,
 				lists: result
@@ -138,7 +126,7 @@ mongodb.MongoClient.connect('mongodb://Nick.s:student@ds014388.mlab.com:14388/gr
      */
     // Third page - user edit lists here
 	app.get('/listsPage', (request, response) => {
-		getFile.then((result) => {
+		dbf.getFile(collection).then((result) => {
 			response.render('lists.hbs', {
 				lists: result
 			})
