@@ -5,17 +5,19 @@ const express = require('express');
 const hbs = require('hbs');
 
 /** File Share module */
-const fs = require('fs')
+const fs = require('fs');
 
 /** Mongo Database module */
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project'
-const dbf = require('./database_functions.js')
+const dbf = require('./database_functions.js');
 
 /** localhost test port */
 const port = process.env.PORT || 8080;
 
 var app = express();
+
+var session = require('client-sessions');
 
 // handlebars setup
 app.set('view engine', 'hbs');
@@ -29,6 +31,13 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 app.use(bodyParser.json())
 
+// creates a session
+app.use(session({
+	cookieName: 'session',
+	secret: 'our_secret_stuff',
+	duration: 1 * 5 * 1000,
+	activeDuration: 1 * 0 * 1000
+}));
 
 /** Connects to the mongo Database 
  * @name database
@@ -44,41 +53,72 @@ MongoClient.connect(url, function(err, client) {
   	const db = client.db('grocery_list_project')
   	const collection = db.collection('nick')
 
+  	app.use((req, res, next) => {
+  		if (req.session && req.session.user) {
+  			collection.findOne({email: req.session.user.email}, function(err, user) {
+  				if (user) {
+  					req.user = user;
+  					delete req.user.password;
+  					req.session.user = user;
+  					res.locals.user = user;
+  				}
+  				next();
+  			})
+  		} else {
+  			next();
+  		}
+  	});
+
+  	function requiredLogin(req, res, next) {
+  		if (!req.user) {
+  			res.redirect('/')
+  		} else {
+  			next();
+  		}
+  	}
+
+  	// Start of website - the login page
+  	app.get('/', (request, response) => {
+		response.render('login.hbs')
+	});
+
 	/**
 	 * Sends back the html page
 	 * @name login
 	 * @function
 	 */
 	app.get('/login', function(req, res, next) {
-	  res.render('login', {title: 'Login', message: 'You must login'});
+	  res.render('login', {
+	  		title: 'Login',
+	  		message: 'You must login'
+	  	});
 	});
 
 	/**
 	 * @login
-	 * Reads the json file login.json to parse username and password
+	 * Checks database for the account, if it exists it moves to 'homePage.hbs'. if it does not it renders 'login.hbs' with a error message
 	 * @param {string} Username 
 	 * @param {string} Password 
 	 * Sets username and password
 	 * gets and renders the home.hbs file
 	 */
 	app.post('/login', function(req, res) {
-	    var email = req.body.email;
-	    var password = req.body.password;
-	    var loginCredentials = JSON.parse(fs.readFileSync('login.json'));
-
-	    if (email == loginCredentials.email && password == loginCredentials.password) {
-	    	app.set('email', email)
-	    	app.set('password', password)
-
-	    	dbf.getFile(collection).then((result) => {
-	    		res.render('home.hbs', {
-					email: app.settings.email,
-					lists: result
+	    collection.findOne({email: req.body.email}, function(err, user) {
+	    	if (!user) {
+	    		res.render('login.hbs', {
+	    			error: 'Wrong email or password'
 	    		})
-			});
-	    } else {
-			res.end('failed')
-		}
+	    	} else {
+	    		if (req.body.password === user.password) {
+	    			req.session.user = user
+	    			res.redirect('/homePage')
+	    		} else {
+	    			res.render('login.hbs', {
+	    				error: 'Wrong email or password'
+	    			})
+	    		}
+	    	}
+	    })
 	});
 
 	/**
@@ -89,12 +129,6 @@ MongoClient.connect(url, function(err, client) {
 	app.post('/add-new-item', function(req, res) {
 		console.log(req.body)
 		res.send('ok')
-	});
-
-  	// Start of website - the login page
-  	// problem: should be app.use
-  	app.get('/loginPage', (request, response) => {
-		response.render('login.hbs')
 	});
     
     app.get('/SignupPage', (request, response) => {
@@ -110,10 +144,10 @@ MongoClient.connect(url, function(err, client) {
      * @param {JSON} response
      */
 
-    app.get('/homePage', (request, response) => {
+    app.get('/homePage', requiredLogin, function(request, response) {
     	dbf.getFile(collection).then((result) => {
    			response.render('home.hbs', {
-				email: app.settings.email,
+				email: request.user.email,
 				lists: result
 			});
     	})
@@ -129,12 +163,17 @@ MongoClient.connect(url, function(err, client) {
      * @param {JSON} response
      */
     // Third page - user edit lists here
-	app.get('/listsPage', (request, response) => {
+	app.get('/listsPage', requiredLogin, function(request, response) {
 		dbf.getFile(collection).then((result) => {
 			response.render('lists.hbs', {
 				lists: result
 			})
 		})
+	})
+
+	app.get('logout', (req, res) => {
+		req.session.reset();
+		res.redirect('/login');
 	})
 });
 
