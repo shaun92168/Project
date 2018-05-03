@@ -80,6 +80,25 @@ MongoClient.connect(url, function(err, client) {
 			res.end('failed')
 		}
 	});
+	
+	app.post('/login', function(req, res) {
+		collection.findOne({email:req.body.email}, function(err, user){
+			if(!user){
+				res.render('login.hbs',{
+					error:'Wrong email or password'
+				})
+			} else {
+				if(req.body.password === user.password) {
+					req.session.user = user
+					res.redirect('/homePage')
+				} else {
+					res.render('login.hbs', {
+						error:'Wrong email or password'
+					})
+				}
+			}
+		})
+	});
 
 	/**
 	 * respond with "ok" when a GET request is made to the add new item
@@ -132,6 +151,7 @@ MongoClient.connect(url, function(err, client) {
 			})
 		})
 	})
+    
 });
 
 
