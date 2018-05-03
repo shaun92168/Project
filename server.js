@@ -5,17 +5,19 @@ const express = require('express');
 const hbs = require('hbs');
 
 /** File Share module */
-const fs = require('fs')
+const fs = require('fs');
 
 /** Mongo Database module */
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project'
-const dbf = require('./database_functions.js')
+const dbf = require('./database_functions.js');
 
 /** localhost test port */
 const port = process.env.PORT || 8080;
 
 var app = express();
+
+var session = require('client-sessions');
 
 // handlebars setup
 app.set('view engine', 'hbs');
@@ -28,6 +30,14 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 app.use(bodyParser.json())
+
+// creates a session
+app.use(session({
+	cookieName: 'session',
+	secret: 'our_secret_stuff',
+	duration: 30 * 60 * 1000,
+	activeDuration: 5 * 30 * 1000
+}));
 
 /** Connects to the mongo Database 
  * @name database
@@ -42,6 +52,12 @@ MongoClient.connect(url, function(err, client) {
   	//setup for DB
   	const db = client.db('grocery_list_project')
   	const collection = db.collection('nick')
+
+  	// app.use(function(req, res, next) {
+  	// 	if (req.session && req.session.user) {
+
+  	// 	}
+  	// });
 
 	/**
 	 * Sends back the html page
@@ -61,23 +77,20 @@ MongoClient.connect(url, function(err, client) {
 	 * gets and renders the home.hbs file
 	 */
 	app.post('/login', function(req, res) {
-	    var email = req.body.email;
-	    var password = req.body.password;
-	    var loginCredentials = JSON.parse(fs.readFileSync('login.json'));
-
-	    if (email == loginCredentials.email && password == loginCredentials.password) {
-	    	app.set('email', email)
-	    	app.set('password', password)
-
-	    	dbf.getFile(collection).then((result) => {
-	    		res.render('home.hbs', {
-					email: app.settings.email,
-					lists: result
-	    		})
-			});
-	    } else {
-			res.end('failed')
-		}
+	    collection.findOne({email: req.body.email}, function(err, user) {
+	    	if (!user) {
+	    		res.render('login.hbs')
+	    	} else {
+	    		if (req.body.password === user.password) {
+	    			dbf.getFile(collection).then((result) => {
+	    				res.render('home.hbs', {
+	    					email: req.body.email,
+	    					lists: result
+	    				})
+	    			})
+	    		}
+	    	}
+	    })
 	});
 
 	/**
