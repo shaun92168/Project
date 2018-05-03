@@ -9,12 +9,20 @@ const fs = require('fs');
 
 /** Mongo Database module */
 const MongoClient = require('mongodb').MongoClient;
+
+/** Mongo Database url*/
 const url = 'mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project'
+
+/** imports a serperate file with the database functions*/
 const dbf = require('./database_functions.js');
 
 /** localhost test port */
 const port = process.env.PORT || 8080;
 
+/** 
+ * A variable in the global name space that loads express js
+ * @var app
+ */
 var app = express();
 
 var session = require('client-sessions');
@@ -35,8 +43,8 @@ app.use(bodyParser.json())
 app.use(session({
 	cookieName: 'session',
 	secret: 'our_secret_stuff',
-	duration: 1 * 5 * 1000,
-	activeDuration: 1 * 0 * 1000
+	duration: 5 * 60 * 1000,
+	activeDuration: 5 * 30 * 1000
 }));
 
 /** Connects to the mongo Database 
