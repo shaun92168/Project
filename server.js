@@ -175,7 +175,7 @@ MongoClient.connect(url, function(err, client) {
 		})
 	})
 
-	app.get('logout', (req, res) => {
+	app.get('/logout', (req, res) => {
 		req.session.reset();
 		res.redirect('/login');
 	})
