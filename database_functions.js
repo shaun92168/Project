@@ -8,7 +8,6 @@ function getFile(collection) {
 				console.log('failed to find file')
 				reject()
 			} else {
-				console.log('worked');
 				resolve([result])
 			}
 		})
