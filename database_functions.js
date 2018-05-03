@@ -8,14 +8,38 @@ function getFile(collection) {
 				console.log('failed to find file')
 				reject()
 			} else {
-				console.log('worked');
 				resolve([result])
 			}
 		})
 	})
 }
 
+function createTable(newTable,db) {
+	db.createCollection(newTable, function(err, res) {
+    	if (err) throw err;
+    	console.log("Collection created!");
+  	});
+}
+
+function addRecord(record,table,db){
+	db.collection(table).insertOne(record, function(err, res) {
+    if (err) throw err;
+    	console.log("1 document inserted");
+    });
+}
+
+function deleteRecord(record,table,db){
+	db.collection(table).deleteOne(record, function(err, obj) {
+    if (err) throw err;
+    console.log("1 document deleted");
+    
+  });
+}
 // put function name to export it
 module.exports = {
-	getFile
+	getFile,
+	createTable,
+	addRecord,
+	deleteRecord
+
 }
