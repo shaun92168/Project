@@ -80,8 +80,7 @@ MongoClient.connect(url, function(err, client) {
 			res.end('failed')
 		}
 	});
-	var myobj = { name: "Company Inc", address: "Highway 37" };
-	dbf.addRecord(myobj,"cookies",db);
+	
 	/**
 	 * respond with "ok" when a GET request is made to the add new item
 	 * @name add new item
