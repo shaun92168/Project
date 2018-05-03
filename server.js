@@ -35,8 +35,8 @@ app.use(bodyParser.json())
 app.use(session({
 	cookieName: 'session',
 	secret: 'our_secret_stuff',
-	duration: 30 * 60 * 1000,
-	activeDuration: 5 * 30 * 1000
+	duration: 1 * 5 * 1000,
+	activeDuration: 1 * 0 * 1000
 }));
 
 /** Connects to the mongo Database 
@@ -53,11 +53,34 @@ MongoClient.connect(url, function(err, client) {
   	const db = client.db('grocery_list_project')
   	const collection = db.collection('nick')
 
-  	// app.use(function(req, res, next) {
-  	// 	if (req.session && req.session.user) {
+  	app.use((req, res, next) => {
+  		if (req.session && req.session.user) {
+  			collection.findOne({email: req.session.user.email}, function(err, user) {
+  				if (user) {
+  					req.user = user;
+  					delete req.user.password;
+  					req.session.user = user;
+  					res.locals.user = user;
+  				}
+  				next();
+  			})
+  		} else {
+  			next();
+  		}
+  	});
 
-  	// 	}
-  	// });
+  	function requiredLogin(req, res, next) {
+  		if (!req.user) {
+  			res.redirect('/')
+  		} else {
+  			next();
+  		}
+  	}
+
+  	// Start of website - the login page
+  	app.get('/', (request, response) => {
+		response.render('login.hbs')
+	});
 
 	/**
 	 * Sends back the html page
@@ -65,12 +88,15 @@ MongoClient.connect(url, function(err, client) {
 	 * @function
 	 */
 	app.get('/login', function(req, res, next) {
-	  res.render('login', {title: 'Login', message: 'You must login'});
+	  res.render('login', {
+	  		title: 'Login',
+	  		message: 'You must login'
+	  	});
 	});
 
 	/**
 	 * @login
-	 * Reads the json file login.json to parse username and password
+	 * Checks database for the account, if it exists it moves to 'homePage.hbs'. if it does not it renders 'login.hbs' with a error message
 	 * @param {string} Username 
 	 * @param {string} Password 
 	 * Sets username and password
@@ -79,14 +105,16 @@ MongoClient.connect(url, function(err, client) {
 	app.post('/login', function(req, res) {
 	    collection.findOne({email: req.body.email}, function(err, user) {
 	    	if (!user) {
-	    		res.render('login.hbs')
+	    		res.render('login.hbs', {
+	    			error: 'Wrong email or password'
+	    		})
 	    	} else {
 	    		if (req.body.password === user.password) {
-	    			dbf.getFile(collection).then((result) => {
-	    				res.render('home.hbs', {
-	    					email: req.body.email,
-	    					lists: result
-	    				})
+	    			req.session.user = user
+	    			res.redirect('/homePage')
+	    		} else {
+	    			res.render('login.hbs', {
+	    				error: 'Wrong email or password'
 	    			})
 	    		}
 	    	}
@@ -102,12 +130,6 @@ MongoClient.connect(url, function(err, client) {
 		console.log(req.body)
 		res.send('ok')
 	});
-
-  	// Start of website - the login page
-  	// problem: should be app.use
-  	app.get('/loginPage', (request, response) => {
-		response.render('login.hbs')
-	});
     
     // Second page - login page moves user here
     /**
@@ -118,10 +140,10 @@ MongoClient.connect(url, function(err, client) {
      * @param {JSON} response
      */
 
-    app.get('/homePage', (request, response) => {
+    app.get('/homePage', requiredLogin, function(request, response) {
     	dbf.getFile(collection).then((result) => {
    			response.render('home.hbs', {
-				email: app.settings.email,
+				email: request.user.email,
 				lists: result
 			});
     	})
@@ -137,12 +159,17 @@ MongoClient.connect(url, function(err, client) {
      * @param {JSON} response
      */
     // Third page - user edit lists here
-	app.get('/listsPage', (request, response) => {
+	app.get('/listsPage', requestLogin, (request, response) => {
 		dbf.getFile(collection).then((result) => {
 			response.render('lists.hbs', {
 				lists: result
 			})
 		})
+	})
+
+	app.get('logout', (req, res) => {
+		req.session.reset();
+		res.redirect('/login');
 	})
 });
 
