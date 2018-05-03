@@ -62,27 +62,6 @@ MongoClient.connect(url, function(err, client) {
 	 * gets and renders the home.hbs file
 	 */
 	app.post('/login', function(req, res) {
-	    var email = req.body.email;
-	    var password = req.body.password;
-	    var loginCredentials = JSON.parse(fs.readFileSync('login.json'));
-
-	    if (email == loginCredentials.email && password == loginCredentials.password) {
-	    	app.set('email', email)
-	    	app.set('password', password)
-
-	    	dbf.getFile(collection).then((result) => {
-	    		res.render('home.hbs', {
-					email: app.settings.email,
-					lists: result
-	    		})
-			});
-	    } else {
-			res.end('failed')
-		}
-	});
-<<<<<<< HEAD
-	
-	app.post('/login', function(req, res) {
 		collection.findOne({email:req.body.email}, function(err, user){
 			if(!user){
 				res.render('login.hbs',{
@@ -90,7 +69,6 @@ MongoClient.connect(url, function(err, client) {
 				})
 			} else {
 				if(req.body.password === user.password) {
-					req.session.user = user
 					res.redirect('/homePage')
 				} else {
 					res.render('login.hbs', {
@@ -101,10 +79,6 @@ MongoClient.connect(url, function(err, client) {
 		})
 	});
 
-=======
-	var myobj = { name: "Company Inc", address: "Highway 37" };
-	dbf.addRecord(myobj,"cookies",db);
->>>>>>> upstream/master
 	/**
 	 * respond with "ok" when a GET request is made to the add new item
 	 * @name add new item
@@ -131,12 +105,12 @@ MongoClient.connect(url, function(err, client) {
      */
 
     app.get('/homePage', (request, response) => {
-    	dbf.getFile(collection).then((result) => {
-   			response.render('home.hbs', {
-				email: app.settings.email,
-				lists: result
-			});
-    	})
+		dbf.getFile(collection).then((result) => {
+			response.render('home.hbs', {
+				email: 'email',
+				list: result
+			})
+		})
 	});
 
     
