@@ -97,6 +97,10 @@ MongoClient.connect(url, function(err, client) {
 		response.render('login.hbs')
 	});
     
+    app.get('/SignupPage', (request, response) => {
+		response.render('Signup.hbs')
+	});
+    
     // Second page - login page moves user here
     /**
      * This takes the username and go to the home page at home.hbs
