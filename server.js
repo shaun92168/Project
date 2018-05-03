@@ -159,7 +159,7 @@ MongoClient.connect(url, function(err, client) {
      * @param {JSON} response
      */
     // Third page - user edit lists here
-	app.get('/listsPage', requestLogin, (request, response) => {
+	app.get('/listsPage', requiredLogin, function(request, response) {
 		dbf.getFile(collection).then((result) => {
 			response.render('lists.hbs', {
 				lists: result
