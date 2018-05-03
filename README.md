@@ -10,9 +10,17 @@ Dependencies:
 6. npm install mongodb --save
 7. npm install -g jsdoc
 
+Getting the documentation:
+1. navigate to the repository directory
+2. jsdoc server.js
+
 Merging the main repository to your local repository:
 1. open git bash and move to the correct directory
 2. git fetch upstream
 3. git merge upstream/master
 4. merge any conflicting changes in an editor
 5. git push origin master
+
+Unit Testing:
+1. We are using "Jest" to test our code
+2. npm install --save-dev jest
