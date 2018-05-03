@@ -15,6 +15,7 @@ function getFile(collection) {
 	})
 }
 
+<<<<<<< HEAD
 function createTable(dbo, tableName) {
     dbo.createCollection(tableName, function(err, res) {
         if (err) throw err;
@@ -32,4 +33,24 @@ function createItem(dbo, tableName, newObj) {
 // put function name to export it
 module.exports = {
 	getFile, createTable, createItem
+=======
+function createTable(newTable,db) {
+	db.createCollection(newTable, function(err, res) {
+    	if (err) throw err;
+    	console.log("Collection created!");
+  	});
+}
+
+function addRecord(record,table,db){
+	db.collection(table).insertOne(record, function(err, res) {
+    if (err) throw err;
+    	console.log("1 document inserted");
+    });
+}
+// put function name to export it
+module.exports = {
+	getFile,
+	createTable,
+	addRecord
+>>>>>>> upstream/master
 }

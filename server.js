@@ -80,6 +80,7 @@ MongoClient.connect(url, function(err, client) {
 			res.end('failed')
 		}
 	});
+<<<<<<< HEAD
 	
 	app.post('/login', function(req, res) {
 		collection.findOne({email:req.body.email}, function(err, user){
@@ -100,6 +101,10 @@ MongoClient.connect(url, function(err, client) {
 		})
 	});
 
+=======
+	var myobj = { name: "Company Inc", address: "Highway 37" };
+	dbf.addRecord(myobj,"cookies",db);
+>>>>>>> upstream/master
 	/**
 	 * respond with "ok" when a GET request is made to the add new item
 	 * @name add new item
