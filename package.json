@@ -27,5 +27,6 @@
   "bugs": {
     "url": "https://github.com/NSkelin/Project/issues"
   },
-  "homepage": "https://github.com/NSkelin/Project#readme"
+  "homepage": "https://github.com/NSkelin/Project#readme",
+  "devDependencies": {}
 }

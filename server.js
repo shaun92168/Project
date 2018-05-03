@@ -120,11 +120,7 @@ MongoClient.connect(url, function(err, client) {
 	    	}
 	    })
 	});
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> upstream/master
 	/**
 	 * respond with "ok" when a GET request is made to the add new item
 	 * @name add new item
