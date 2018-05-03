@@ -1,7 +1,14 @@
 body {
 	margin: 0;
 	padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url(https://files.slack.com/files-pri/TAB2BGHUH-FAG5WABUH/depositphotos_68231477-stock-illustration-shopping-cart-doodle-drawing-seamless.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
+
 
 /*For the Navigation bar*/
 	#navBar {
@@ -10,6 +17,7 @@ body {
 	    padding: 0;
 	    overflow: hidden;
 	    background-color: #315EDC;
+        width:100%;
 		}
 
 	.navBarLeft {
@@ -20,6 +28,9 @@ body {
 	    text-decoration: none;
 	   	float: left;
 	}
+    .navBarLeft:hover {
+        background-color: #073364;
+    }
 	
 	.navBarRight {
 		display: block;
@@ -29,6 +40,9 @@ body {
 	    text-decoration: none;
 		float: right;
 	}
+    .navBarRight:hover {
+        background-color: #073364;
+    }
 
 	.navBarLink:hover {
 	    background-color: #2145AB;
@@ -40,4 +54,47 @@ body {
 
 ul {
 	list-style-type: none;
+    padding-left:0px;
+}
+#categories {
+    position: fixed;
+    text-align: center;
+    width: 50vw;
+    left: 0px;
+    right:0px;
+    top: 100px;
+    margin: auto; 
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    opacity: 0.95;
+    
+}
+button {
+    background-color: #315EDC;
+    border: 0.5px solid #002280;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    opacity: 0.7;
+    border-radius: 5px;
+}
+button:hover {
+    opacity: 1.0;
+    transition: 0.4s;
+}
+#menu {
+    position: absolute;
+    right:0px;
+    left:0px;
+    text-align: center;
+}
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
