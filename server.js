@@ -29,7 +29,6 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 app.use(bodyParser.json())
 
-
 /** Connects to the mongo Database 
  * @name database
  */
