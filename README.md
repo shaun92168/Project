@@ -1,5 +1,9 @@
-# Project
-This is our main/live repositry
+# Quicklists
+# Projects 2910
+
+This is a web application that we are creating for Projects Course 2910 in the CIT program at BCIt. It will help users to create lists for future purchases
+Implements mongodb and is programmed in Node JS, html, css.
+This is our main/live repository
 
 Dependencies:
 1. Install Node
