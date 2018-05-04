@@ -67,3 +67,10 @@ body {
 	right: 0;
 	text-align: center;
 }
+
+#error {
+	position: relative;
+	text-align: center;
+	top: 56.5%;
+	color: red;
+}
