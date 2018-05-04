@@ -35,8 +35,8 @@ app.use(bodyParser.json())
 app.use(session({
 	cookieName: 'session',
 	secret: 'our_secret_stuff',
-	duration: 1 * 5 * 1000,
-	activeDuration: 1 * 0 * 1000
+	duration: 5 * 60 * 1000,
+	activeDuration: 2 * 30 * 1000
 }));
 
 /** Connects to the mongo Database 
