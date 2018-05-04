@@ -2,7 +2,7 @@ body {
 	margin: 0;
 	padding: 0;
 	z-index:2;
-    background-image:url("shopcart3.jpg");
+    background-image:url("shopcart4.jpg");
 }
 
 .text {
@@ -22,7 +22,7 @@ body {
 }
 
 #login {
-	height:50%;
+	height:55%;
     width:25%;
     background-color:#cfe0e8;
     position:absolute;
