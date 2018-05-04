@@ -175,6 +175,13 @@ MongoClient.connect(url, function(err, client) {
 		req.session.reset();
 		res.redirect('/login');
 	})
+
+	/*
+	 * Start the account page
+	 */
+	app.get('/account', (request, response) => {
+		response.render('accountsettings.hbs')
+	});
 });
 
 

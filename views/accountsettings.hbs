@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>Account Settings</title>
+    <link href='account_style.css' rel='stylesheet' type='text/css' />
+</head>
+
+<body>
+    {{> navbar}}
+    <div class="outermain">
+        <div class="innermain">
+            <h1>Account Settings</h1>
+            <form action="http://webdevfoundations.net/scripts/formdemo.asp" method="POST">
+                <p>Enter current password to make changes:
+                    <br>
+                    <input type="password" name="password">
+                </p>
+                <h2>Change Password</h2>
+                <p>Enter new Password:
+                    <input type="password" name="newpass1">
+                </p>
+                <p>Re-Enter new Password:
+                    <input type="password" name="newpass1">
+                </p>
+                <h2>Change Email</h2>
+                <p>Enter new email:
+                    <input type="email" name="newemail">
+                </p>
+                <h2>Delete Account</h2>
+                <p>Yes&nbsp;
+                    <input type="radio" name="delete" value="yes">&nbsp; No&nbsp;
+                    <input type="radio" name="delete" value="no" checked>
+                </p>
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+</body>
+{{navbar}}
+
+</html>
