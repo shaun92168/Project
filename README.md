@@ -27,4 +27,7 @@ Merging the main repository to your local repository:
 
 Unit Testing:
 1. We are using "Jest" to test our code
-2. npm install --save-dev jest
+2. Download the following packages below
+3. npm install --save-dev jest
+4. npm install --save-dev chai
+5. npm install --save-dev chai-http
