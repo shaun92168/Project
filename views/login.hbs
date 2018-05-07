@@ -3,15 +3,12 @@
 	<head>
 		<title>Login page</title>
 		<link href='login_style.css' rel='stylesheet' type='text/css' />
+        <a href="signup.hbs"></a>
 	</head>
 	<body>
-		<div class='text' id='title'>
-			<h1>QuickList</h1>
-		</div>
 		<div id='login'>
 			<div id='loginLogo' class='text'>
-				<h2>Login</h2>
-				{{error}}
+				<h2>QuickList</h2>
 			</div>
 
 			<form id='loginForm' action="/login" method="post">
@@ -23,9 +20,15 @@
 			    	Password<br>
 			        <input type="password" name="password" placeholder='Enter your Password' />
 			    </div>
+			    <div id="error">
+			    	{{error}}
+			    </div>
 			    <div id='submitEntry'>
 			    	<input type="submit" value="Login"/>
 			    </div>
+                <div id="signup">
+                     New User? <a href="signupPage">Sign Up Here!</a> </br> 
+                </div>
 			</form>
 		</div>
 	</body>

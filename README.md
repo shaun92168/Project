@@ -1,5 +1,9 @@
-# Project
-This is our main/live repositry
+# Quicklists
+# Projects 2910
+
+This is a web application that we are creating for Projects Course 2910 in the CIT program at BCIt. It will help users to create lists for future purchases
+Implements mongodb and is programmed in Node JS, html, css.
+This is our main/live repository
 
 Dependencies:
 1. Install Node
@@ -24,4 +28,7 @@ Merging the main repository to your local repository:
 
 Unit Testing:
 1. We are using "Jest" to test our code
-2. npm install --save-dev jest
+2. Download the following packages below
+3. npm install --save-dev jest
+4. npm install --save-dev chai
+5. npm install --save-dev chai-http

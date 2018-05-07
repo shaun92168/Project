@@ -40,7 +40,7 @@ app.use(session({
 	cookieName: 'session',
 	secret: 'our_secret_stuff',
 	duration: 5 * 60 * 1000,
-	activeDuration: 5 * 30 * 1000
+	activeDuration: 2 * 30 * 1000
 }));
 
 /** Connects to the mongo Database 
@@ -135,6 +135,10 @@ MongoClient.connect(url, function(err, client) {
 		res.send('ok')
 	});
     
+    app.get('/SignupPage', (request, response) => {
+		response.render('Signup.hbs')
+	});
+    
     // Second page - login page moves user here
     /**
      * This takes the username and go to the home page at home.hbs
@@ -175,9 +179,21 @@ MongoClient.connect(url, function(err, client) {
 		req.session.reset();
 		res.redirect('/login');
 	})
+
+	/*
+	 * Start the account page
+	 */
+	app.get('/account', (request, response) => {
+		response.render('accountsettings.hbs')
+	});
 });
 
 
 app.listen(port, () => {
 	console.log(`Server is up on the port ${port}`);
 });
+
+/*
+ * For Unit Testing
+ */
+module.exports = app;
