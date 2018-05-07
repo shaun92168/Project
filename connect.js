@@ -58,13 +58,6 @@ function createTable(newTable) {
 	});
 }
 
-
-module.exports = {
-	readFile,
-	addRecord,
-	createTable
-}
-
 function addRecord(record,table){
     MongoClient.connect(url, function(err, client) {
         if(err) {
@@ -79,4 +72,10 @@ function addRecord(record,table){
         client.close();
     });
 }   
-	
+
+module.exports = {
+	readFile,
+	addRecord,
+	createTable
+}
+
