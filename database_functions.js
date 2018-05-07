@@ -32,7 +32,6 @@ function deleteRecord(record,table,db){
 	db.collection(table).deleteOne(record, function(err, obj) {
     if (err) throw err;
     console.log("1 document deleted");
-    
   });
 }
 // put function name to export it
