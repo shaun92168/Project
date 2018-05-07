@@ -1,35 +1,38 @@
 body {
 	margin: 0;
 	padding: 0;
+	z-index:2;
+    background-image:url("shopcart4.jpg");
 }
 
 .text {
 	font-family: verdana;
-	color: white;
+	color: black;
 	text-align: center;
 }
 
 #title {
-	display: inline-block;
-	width: 100%;
-	background-color: #315EDC;
-	border-bottom: 2px solid #003B7F;
+	text-align:center;
+	top: 50px;
+	right: 0px;
+	left: 0px;
+	position: fixed;
+	margin: auto;
+	z-index:5;
 }
 
 #login {
-	position: absolute;
-	height:50%;
-	width:25%;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	margin: auto;
-	background-color: #315EDC;
-	border-top: 2px solid #97AFC9;
-	border-left: 2px solid #97AFC9;
-	border-bottom: 2px solid #29313A;
-	border-right: 2px solid #29313A;
+	height:55%;
+    width:25%;
+    background-color:#cfe0e8;
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin:auto;
+    border-color:black;
+    border-style:solid;
 }
 
 #emailEntry {
@@ -37,6 +40,7 @@ body {
 	top: 5%;
 	left: 0;
 	right: 0;
+	color: black;
 }
 
 #passwordEntry {
@@ -44,6 +48,7 @@ body {
 	top: 35%;
 	left: 0;
 	right: 0;
+	color: black;
 }
 
 #submitEntry {
