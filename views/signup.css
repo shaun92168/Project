@@ -1,5 +1,5 @@
 #signupscreen{
-    height:300px;
+    height:280px;
     width:200px;
     background-color:#F5F5DC;
     background-color:#bccad6;
@@ -16,19 +16,18 @@
  
 body{    
     z-index:2;
-    background-image:url("shopcart4.jpg");
+    background-image:url("shopcart.jpg");
 }
  
 h1{
     font-family:verdana;
     text-align:center;
     position:fixed;
-    top:15px;
+    top:30px;
     left:0px;
     right:0px;
     margin:auto;
     z-index:5;
-    /*background-color: #bccad6;*/
 }
  
 .txt{
