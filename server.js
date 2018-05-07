@@ -19,10 +19,6 @@ const dbf = require('./database_functions.js');
 /** localhost test port */
 const port = process.env.PORT || 8080;
 
-/** 
- * A variable in the global name space that loads express js
- * @var app
- */
 var app = express();
 
 var session = require('client-sessions');
