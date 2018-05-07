@@ -41,7 +41,6 @@ function readFile(data, callback){
 		});
 	});
 }
-<<<<<<< HEAD
 
 function createTable(newTable) {
 	MongoClient.connect(url, function(err, client) {
@@ -60,8 +59,7 @@ function createTable(newTable) {
 }
 
 
-=======
->>>>>>> upstream/master
 module.exports = {
-	readFile
+	readFile,
+	createTable
 }
