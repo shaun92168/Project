@@ -9,7 +9,11 @@ const fs = require('fs');
 
 /** Mongo Database module */
 const MongoClient = require('mongodb').MongoClient;
+
+/** Mongo Database url*/
 const url = 'mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project'
+
+/** imports a serperate file with the database functions*/
 const dbf = require('./database_functions.js');
 
 /** localhost test port */
@@ -171,7 +175,7 @@ MongoClient.connect(url, function(err, client) {
 		})
 	})
 
-	app.get('logout', (req, res) => {
+	app.get('/logout', (req, res) => {
 		req.session.reset();
 		res.redirect('/login');
 	})

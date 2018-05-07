@@ -13,6 +13,7 @@ Dependencies:
 5. npm install file-system --save
 6. npm install mongodb --save
 7. npm install -g jsdoc
+8. npm install client-sessions
 
 Getting the documentation:
 1. navigate to the repository directory
