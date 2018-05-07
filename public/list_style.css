@@ -2,7 +2,7 @@ body {
 	margin: 0;
 	padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url(https://files.slack.com/files-pri/TAB2BGHUH-FAG5WABUH/depositphotos_68231477-stock-illustration-shopping-cart-doodle-drawing-seamless.jpg);
+    /*background-image: url(shopcart4.jpg);*/
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -57,7 +57,7 @@ ul {
     padding-left:0px;
 }
 #categories {
-    position: fixed;
+    position: absolute;
     text-align: center;
     width: 50vw;
     left: 0px;

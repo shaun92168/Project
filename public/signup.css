@@ -1,7 +1,7 @@
 #signupscreen{
-    height:280px;
+    height:300px;
     width:200px;
-    background-color:#F5F5DC;
+    background-color:#bccad6;
     position:fixed;
     padding:95px;
     top:0px;
@@ -15,18 +15,19 @@
 
 body{    
     z-index:2;
-    background-image:url("shopcart.jpg");
+    background-image:url("shopcart4.jpg");
 }
 
 h1{
     font-family:verdana;
     text-align:center;
     position:fixed;
-    top:30px;
+    top:15px;
     left:0px;
     right:0px;
     margin:auto;
     z-index:5;
+    /*background-color: #bccad6;*/
 }
 
 .txt{
