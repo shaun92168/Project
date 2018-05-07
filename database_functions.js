@@ -34,6 +34,13 @@ function deleteRecord(record,table,db){
     console.log("1 document deleted");
   });
 }
+
+function dropCategory(table,db){
+	db.collection(table).drop(function(err, delOK){
+	if (err) throw err;
+    if (delOK) console.log("Collection deleted");
+	});
+}
 // put function name to export it
 module.exports = {
 	getFile,
