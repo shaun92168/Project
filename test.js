@@ -1,6 +1,7 @@
 /*
  * End to End Unit Testing
  */
+
 let chai = require('chai');
 // Chai HTTP provides an interface for live integration testing
 let chaiHttp = require('chai-http');
@@ -30,32 +31,13 @@ const binaryParser = function(res, cb) {
 /*
  * Waiting time for MongoDB to execute before running the test
  */
-describe('Server', () => {
+/*describe('Server', () => {
     beforeAll((done) => {
         setTimeout(done, 4000);
-    });
+    });*/
 
     /*
-     * GET Login Validation Testing
-     */
-    describe("GET /login", () => {
-        test("Should display a login page", () => {
-            return chai.request(server)
-                .get('/login')
-                .buffer().parse(binaryParser)
-                //.send({email: "example@email.com",password: "abcdef"})
-                .then((res) => {
-                    expect(res).to.have.status(200);
-                    expect(res.body).to.contain('Enter your Email');
-                    expect(res.body).to.contain('Enter your Password');
-                    //res.body.length.should.be.eql(0);
-                    //done();
-                });
-        });
-    });
-
-    /*
-     * POST Login Validation Testing
+     * POST Login Validation
      */
     describe("POST /login", () => {
         test("Should display error message", () => {
@@ -69,4 +51,4 @@ describe('Server', () => {
                 });
         });
     });
-});
+/*});*/
