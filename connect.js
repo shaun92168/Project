@@ -41,25 +41,6 @@ function readFile(data, callback){
 		});
 	});
 }
-
-function createTable(newTable) {
-	MongoClient.connect(url, function(err, client) {
-		if(err) {
-	    	console.log(err);
-		}
-		
-		const db = client.db('grocery_list_project');
-		
-		db.createCollection(newTable, function(err, res) {
-			if (err) throw err;
-			console.log("Collection created!");
-			client.close();
-		});
-	});
-}
-
-
 module.exports = {
-	readFile,
-	createTable
+	readFile
 }
