@@ -48,7 +48,7 @@ function createTable(newTable) {
 	    	console.log(err);
 		}
 		
-		const db = client.db('grocery_list_project')
+		const db = client.db('grocery_list_project');
 		
 		db.createCollection(newTable, function(err, res) {
 			if (err) throw err;
