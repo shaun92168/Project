@@ -137,8 +137,6 @@ app.listen(port, () => {
     console.log(`Server is up on the port ${port}`);
 });
 
-
-
 /*
  * For Unit Testing
  */
