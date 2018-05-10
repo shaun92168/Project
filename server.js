@@ -110,21 +110,28 @@ app.get('/listsPage', function(req, res) {
 	}
 });
 
+/**
+ * respond with "ok" when a GET request is made to the add new item
+ * @name add new item
+ * @function
+ */
+app.post('/add-new-item', function(req, res) {
+    console.log(req.body)
+    res.send('ok')
+});
+
 /*
  * Start the account page
  */
-// Doesn't need to connect to db
 app.get('/account', (request, response) => {
     response.render('accountsettings.hbs')
 });
 
-// Doesn't need to connect to db
 app.get('/logout', (req, res) => {
     req.session.reset();
     res.redirect('/');
 })
 
-// Doesn't need to connect to db
 function requiredLogin(req, res, next) {
     if (!req.user) {
         res.redirect('/')
