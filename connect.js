@@ -58,7 +58,7 @@ function createTable(newTable) {
 	});
 }
 
-function addRecord(record,table){
+function addRecord(record,table, callback){
     MongoClient.connect(url, function(err, client) {
         if(err) {
 	    	console.log(err);
@@ -66,8 +66,13 @@ function addRecord(record,table){
         const db = client.db('grocery_list_project')
 
 	    db.collection(table).insertOne(record, function(err, res) {
-        if (err) throw err;
+        if (err){
+            callback("error");
+            throw err;
+        } else {
     	    console.log("1 document inserted");
+            callback("success");
+        }
     	});
         client.close();
     });
