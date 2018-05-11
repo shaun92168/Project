@@ -16,21 +16,32 @@
 				<h1>Welcome {{email}}</h1>
 			</div>
 		</div>
-
-		<div class='text'>
-			<h3><b>Your Shopping Lists:</b></h3>
+		<div class="outermain">
+			<div class="innermain">
+				<div class='text'>
+					<form>
+						<h3 style="text-align: center;"><b>Your Shopping Lists:</b></h3>
+						<div id='createList'>
+							<input id='chooseList' placeholder='Enter a list' />
+							<button id='addList'></button>
+							<button id='delList'></button>
+						</div>
+					</form>
+				</div>
+				<div>
+					<ul class = "indent">
+					{{#each lists as |list|}}
+						<form action='/listsPage' method='get'>
+							<il><input class='item' type='submit' value='{{list.name}}'></il>
+							<!-- <li class = "addlist"><a href = "addlist.html"><h3>Create New List</h3></a></li> -->
+						</form>
+					{{else}}
+						<button><a href='/listsPage'>New List</a></button>
+					{{/each}}
+					</ul>
+				</div>
+			</div>
 		</div>
-
-		<div>
-			<ul>
-			{{#each lists as |list|}}
-				<form action='/listsPage' method='get'>
-					<il><input class='item' type='submit' value='{{list.name}}'></il>
-				</form>
-			{{else}}
-				<button><a href='/listsPage'>New List</a></button>
-			{{/each}}
-			</ul>
-		</div>
+		
 	</body>
 </html>

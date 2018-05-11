@@ -1,62 +1,177 @@
 body {
-	margin: 0;
-	padding: 0;
+	font-family: 'Roboto', sans-serif;
+	background-color: white;
+	color: black;
+    margin: auto;
 }
 
+
 /*For the Navigation bar*/
-	#navBar {
-	    list-style-type: none;
-	    margin: 0;
-	    padding: 0;
-	    overflow: hidden;
-	    background-color: #315EDC;
-		}
 
-	.navBarLeft {
-	    display: block;
-	    color: white;
-	    text-align: center;
-	    padding: 14px 16px;
-	    text-decoration: none;
-	   	float: left;
-	}
+#navBar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #315EDC;
+}
 
-	.navBarRight {
-		display: block;
-	    color: white;
-	    text-align: center;
-	    padding: 14px 16px;
-	    text-decoration: none;
-		float: right;
-	}
+.navBarLeft {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    float: left;
+}
 
-	.navBarLink:hover {
-	    background-color: #2145AB;
-	}
+.navBarRight {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    float: right;
+}
 
-	#home {
-		background-color: #073364;
-	}
+.navBarLink:hover {
+    background-color: #2145AB;
+}
+
+#home {
+    background-color: #073364;
+}
+
 
 /*For the category lists*/
-	.item {
-		list-style-type: none;
-		font-family: verdana;
-		text-decoration: none;
-		color: black;
-		float: left;
-	}
+
+.item {
+    list-style-type: none;
+    font-family: verdana;
+    text-decoration: none;
+    color: black;
+    float: left;
+    position: absolute;
+    top: 240px;
+}
 
 #logo {
-	border-bottom: 1px solid #5D6877;
-	width: 70%;	
-	margin: auto;
+    border-bottom: 1px solid #5D6877;
+    width: 70%;
+    margin: auto;
 }
 
 .logoText {
-	text-align: center;
+    text-align: center;
 }
 
 .text {
-	font-family: verdana;
+    font-family: verdana;
+}
+
+/*For the Add lists*/
+
+ul.indent {
+    list-style-type: none;
+    position: relative;
+    bottom: 150px;
+    right: 60px;
+    text-align: center;
+}
+
+ul.indent a {
+    color: black;
+    text-decoration: none;
+}
+
+ul.indent a:hover {
+    text-decoration: underline;
+}
+
+
+div.outermain {
+	position: relative;
+	margin-top: 0px;
+	width: 70%;
+	margin-left: 15%;
+	margin-right: auto;
+	background-color: #EEEEEE;
+	min-height: 100vh;	
+}
+
+div.innermain {
+	padding-top: 20px;
+	padding-bottom: 50px;
+	margin-left: 10%;
+	margin-right: 10%;
+
+}
+
+div.innermain a {
+	color: black;
+	text-decoration: none;
+}
+
+div.innermain a:hover {
+	text-decoration: underline; 
+}
+
+button {
+    background-color: #315EDC;
+    border: 0.5px solid #002280;
+    color: white;
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 0px;
+    cursor: pointer;
+    opacity: 0.7;
+    border-radius: 5px;
+}
+button:hover {
+    opacity: 1.0;
+    transition: 0.4s;
+}
+
+#createList {
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    text-align: center;
+}
+
+#chooseList {
+    border: none;
+    border-color: blue;
+    border-radius: 2px;
+    margin: 15px 0px 0px 15px;
+    padding: 10px 15px;
+    font-size: 15px;
+    width: 220px;
+}
+
+#chooseList:hover {
+    transition-duration: 0.2s;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+#chooseList:focus {
+    transition-duration: 0.2s;
+    outline-width: 0;
+}
+
+#addList {
+	background: url("add_extra_small.png") center center no-repeat;
+	background-color: #315EDC;
+	position: relative;
+	bottom: 4px;
+}
+
+#delList {
+    background: url("delete_extra_small.png") center center no-repeat;
+    background-color: #315EDC;
+    position: relative;
+    bottom: 4px;
 }
