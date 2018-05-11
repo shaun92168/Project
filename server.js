@@ -47,11 +47,11 @@ app.use(session({
 app.post('/login', function(req, res) {
 
     getDB.readFile({email: req.body.email}, function(err, user) {
-    	if(user === 'failed') {
-    		res.render('login.hbs', {
+        if(user === 'failed') {
+            res.render('login.hbs', {
                 error: 'Wrong email or password'
             });
-    	} else {
+        } else {
             if (req.body.password === user.password) {
                 req.session.user = user
                 res.redirect('/homePage')
@@ -82,14 +82,14 @@ app.get('/SignupPage', (request, response) => {
  * @param {JSON} response
  */
 app.get('/homePage', function(req, res) {
-	if(req.session && req.session.user){
-		res.render('home.hbs', {
+    if(req.session && req.session.user){
+        res.render('home.hbs', {
             email: req.session.user.email,
             lists: req.session.user.lists
         });
-	} else {
-		res.redirect('/');
-	}
+    } else {
+        res.redirect('/');
+    }
 });
 
 /** User input what grocery items they want and then click a button. 
@@ -101,13 +101,13 @@ Next, the requested information is displayed on the webpage.
  * @param {JSON} response
  */
 app.get('/listsPage', function(req, res) {
-	if(req.session && req.session.user) {
-		res.render('lists.hbs', {
+    if(req.session && req.session.user) {
+        res.render('lists.hbs', {
             lists: req.session.user.lists
         });
-	} else {
-		res.redirect('/');
-	}
+    } else {
+        res.redirect('/');
+    }
 });
 
 /**

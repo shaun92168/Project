@@ -85,6 +85,7 @@ function dropCategory(email, listIndex, categoryIndex){
    		updateDb(email, user)
 
     })
+}
 function addRecord(record,table, callback){
     MongoClient.connect(url, function(err, client) {
         if(err) {
@@ -104,14 +105,31 @@ function addRecord(record,table, callback){
         client.close();
     });
 }   
-
-
+function deleteRecord(record,table, callback){
+    MongoClient.connect(url, function(err, client) {
+        if(err) {
+	    	console.log(err);
+		}
+        const db = client.db('grocery_list_project')
+        
+	    db.collection(table).deleteOne(record, function(err, res) {
+        if (err){
+            callback("error");
+            throw err;
+        } else {
+            console.log("1 document deleted");
+            callback("success");
+    }
+  });
+  client.close();
+    });
 }
-
 
 
 module.exports = {
 	readFile,
-	dropCategory,
-	updateDb
+	addRecord,
+	updateDb,
+    deleteRecord,
+    dropCategory
 }
