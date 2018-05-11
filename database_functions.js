@@ -46,6 +46,7 @@ module.exports = {
 	getFile,
 	createTable,
 	addRecord,
-	deleteRecord
+	deleteRecord,
+	dropCategory
 
 }

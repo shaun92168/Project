@@ -16,6 +16,7 @@
     "file-system": "^2.2.2",
     "handlebars": "^4.0.11",
     "hbs": "^4.0.1",
+    "mlab-data-api": "^0.2.2",
     "mongodb": "^3.0.7",
     "request": "^2.83.0",
     "run-middleware": "^0.6.6"
