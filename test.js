@@ -101,6 +101,18 @@ describe.skip("addRecord function testing", ()=>{
     });
 });
 
+describe.only("dropCategory function testing", ()=>{
+	test("delete category inside list", ()=>{
+		myDB.dropCategory(obj,"Categories", function(msg){
+			expect(msg).toBe("success");
+
+       })
+
+   });
+
+});
+        
+
 describe.skip("deleteRecord function testing", ()=>{
     test("added product to a list", ()=>{
         myDB.deleteRecord(obj,"Users", function(msg){
@@ -121,3 +133,4 @@ describe.only("list names testing", ()=>{
         expect(listNameValidate("List")).toBe("list");
     });
 });
+
