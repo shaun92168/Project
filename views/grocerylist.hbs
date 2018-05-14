@@ -3,7 +3,7 @@
 	<head>
 		<meta charset='utf-8'>
 		<title>Home</title>
-		<link href='/list_style.css' rel='stylesheet' type='text/css'/>
+		<link href='list_style.css' rel='stylesheet' type='text/css'/>
 	</head>
 
 	<body>
@@ -20,20 +20,22 @@
 		</div>
 
 		<div id='categories'>
-			<h2>{{list.name}}</h2>
+			{{#each lists as |list|}}
+					<h2>{{list.name}}</h2>
             <hr />
                 <button id='newCategory'>New Category</button>
 				{{#each list.categories as |categories|}}
 					<ul id='{{categories.name}}'><h4>{{categories.name}}</h4>
-					<!-- <ul id='{{categories.name}}'><h4><a href='{{link}}'>{{categories.name}}</a></h4> -->
 					{{#each categories.items}}
 						<li id='{{this}}'>{{this}}</li>
 					{{/each}}
 					</ul>
 				{{/each}}
+			{{/each}}
+
 		</div>
         
-		<script src='/list_js.js'></script>
+		<script src='list_js.js'></script>
 	</body>
 	{{navbar}}
 </html>

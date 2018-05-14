@@ -93,17 +93,31 @@ var obj = {
     ]
 };
 
-describe.only("addRecord function testing", ()=>{
+describe.skip("addRecord function testing", ()=>{
     test("added product to a list", ()=>{
         myDB.addRecord(obj,"Users", function(msg){
             expect(msg).toBe("success");
         })
     });
 });
-describe.only("deleteRecord function testing", ()=>{
+
+describe.skip("deleteRecord function testing", ()=>{
     test("added product to a list", ()=>{
         myDB.deleteRecord(obj,"Users", function(msg){
             expect(msg).toBe("success");
         })
+    });
+});
+
+
+var listNameValidate = require("./validate.js");
+
+describe.only("list names testing", ()=>{
+    test("a valid list name with space", ()=>{
+        expect(listNameValidate("l i s t")).toBe("list");
+    });
+
+    test("a valid list name with case sensitive", ()=>{
+        expect(listNameValidate("List")).toBe("list");
     });
 });

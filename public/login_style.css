@@ -22,10 +22,10 @@ body {
 }
 
 #login {
-	height:55%;
-    width:25%;
+	height:320px;
+    width:320px;
     background-color:#cfe0e8;
-    position:absolute;
+    position:fixed;
     top:0px;
     bottom:0px;
     left:0px;

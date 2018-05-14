@@ -92,17 +92,47 @@ app.get('/homePage', function(req, res) {
     }
 });
 
-/** User input what grocery items they want and then click a button. 
-The webpage then requests information from the database, which then response by sending that information back to the webpage. 
-Next, the requested information is displayed on the webpage. 
+/** User input what items they want and then click a button.
  * @name ListPage
  * @function
  * @param {JSON} request
  * @param {JSON} response
  */
-app.get('/listsPage', function(req, res) {
+app.get('/listsPage/:listname', function(req, res) {
     if(req.session && req.session.user) {
-        res.render('lists.hbs', {
+        var allLists = req.session.user.lists;
+        var listName = req.params.listname;
+        var correctList = null;
+
+        // GO TRHOUGH ALL LIST ITEMS
+          // IF CURRENT LIST.name === listName
+            // correctList = CURRENT LIST 
+            // break;
+
+        // IF correctLIST === null ???
+            // render ERROR>HBS
+        // ELSE
+            // render list.hbs
+
+            res.render('lists.hbs', {
+            list: correctList
+        });
+    } else {
+        res.redirect('/');
+    }
+});
+
+/** User input what grocery items they want and then click a button. 
+The webpage then requests information from the database, which then response by sending that information back to the webpage. 
+Next, the requested information is displayed on the webpage. 
+ * @name groceryListPage
+ * @function
+ * @param {JSON} request
+ * @param {JSON} response
+ */
+app.get('/groceryListPage', function(req, res) {
+    if(req.session && req.session.user) {
+        res.render('grocerylist.hbs', {
             lists: req.session.user.lists
         });
     } else {

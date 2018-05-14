@@ -52,7 +52,7 @@ body {
     color: black;
     float: left;
     position: absolute;
-    top: 240px;
+    top: 160px;
 }
 
 #logo {
@@ -136,9 +136,6 @@ button:hover {
 }
 
 #createList {
-    position: absolute;
-    right: 0px;
-    left: 0px;
     text-align: center;
 }
 
