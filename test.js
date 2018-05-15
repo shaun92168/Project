@@ -1,61 +1,4 @@
-/*
- * End to End Unit Testing
- */
-
-let chai = require('chai');
-// Chai HTTP provides an interface for live integration testing
-let chaiHttp = require('chai-http');
-let server = require('./server');
-let should = chai.should();
-let expect = chai.expect;
-
-/*
- * Chai-http makes it very easy to test Node.js HTTP applications without having 
- * to to go through the hassle of finding a free port and start the service manually.
- * 
- * Tell chai to use chai-http.
- */
-chai.use(chaiHttp);
-
-const binaryParser = function(res, cb) {
-    // res.setEncoding("text");
-    res.data = "";
-    res.on("data", function(chunk) {
-        res.data += chunk;
-    });
-    res.on("end", function() {
-        cb(null, res.data);
-    });
-};
-
-/*
- * Waiting time for MongoDB to execute before running the test
- */
-/*describe('Server', () => {
-    beforeAll((done) => {
-        setTimeout(done, 4000);
-    });*/
-
-    /*
-     * POST Login Validation
-     */
-    describe.skip("POST /login", () => {
-        test("Should display error message", () => {
-            return chai.request(server)
-                .post('/login')
-                .send({ email: "example@email.com", password: "abcdef" })
-                .buffer().parse(binaryParser)
-                .then((res) => {
-                    expect(res).to.have.status(200);
-                    expect(res.body).to.contain('Wrong email or password');
-                });
-        });
-    });
-/*});*/
-
-var myDB = require("./connect");
-
-
+var myDB = require("./connect.js");
 var obj = {
    
     "username": "brendon1",
@@ -95,47 +38,51 @@ var obj = {
 
 describe.skip("addRecord function testing", ()=>{
     test("added product to a list", ()=>{
-        myDB.addRecord(obj,"Users", function(msg){
+        myDB.addUserDB(obj, "Users", function(msg){
             expect(msg).toBe("success");
-        })
+        });
     });
 });
-
-describe.only("dropCategory function testing", ()=>{
-	test("delete category inside list", ()=>{
-		myDB.dropCategory(obj,"Categories", function(msg){
-			expect(msg).toBe("success");
-
-       })
-
-   });
-
-});
-        
 
 describe.skip("deleteRecord function testing", ()=>{
-    test("added product to a list", ()=>{
-        myDB.deleteRecord(obj,"Users", function(msg){
+    test("deleted product from a list", ()=>{
+        myDB.deleteUserDB(obj, "Users", function(msg){
             expect(msg).toBe("success");
-        })
+        });
     });
 });
 
-
-var listNameValidate = require("./validate.js");
-
-describe.only("list names testing", ()=>{
-    test("a valid list name with space", ()=>{
-        expect(listNameValidate("l i s t")).toBe("list");
-    });
-
-    test("a valid list name with case sensitive", ()=>{
-        expect(listNameValidate("List")).toBe("list");
+describe.skip("dropCategory function testing", () => {
+    test("delete category inside list", () => {
+        myDB.deleteCategoryDB('nick@123.ca', 'grocery list', 'Produce', (msg) => {
+            expect(msg).toBe("success");
+        });
     });
 });
+
+describe.skip("login validation testing.", () => {
+    test("email should be proper email format.", () => {
+        extra.login('nick123.com', '123', (user) => {
+            expect(user).toBe('failed');
+        });
+
+        extra.login('nick@123', '123', (user) => {
+            expect(user).toBe('failed');
+        });
+
+        extra.login('nick@123com', '123', (user) => {
+            expect(user).toBe('failed');
+        });
+    });
+});
+
+describe.skip("getListIndex testing", () => {
+    test("should return a number", () => {
+        expect(myDB.getListIndex('grocery list', obj).tobe(0))
+    })
+})
 
 var email = {"email":"brendon@1234"};
-
 var shaunObj = {
     
     "username": "shaun",
@@ -173,7 +120,7 @@ var shaunObj = {
     ]
 };
 
-describe.only("updateDB testing", ()=>{
+describe.skip("updateDB testing", ()=>{
 	test("update brendon@1234 to shaun@1234", ()=>{
 		myDB.updateDb(email, shaunObj)
 	}); 

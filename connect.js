@@ -73,10 +73,10 @@ function updateDb(email,data){
 
 	  	client.close();
 	  });
-
 }
 
-function dropCategory(email, listIndex, categoryIndex){
+
+function deleteCategoryDb(email, listIndex, categoryIndex){
 
     readFile(email, function(err, user) {
     	
@@ -88,7 +88,23 @@ function dropCategory(email, listIndex, categoryIndex){
 
     })
 }
-function addRecord(record,table, callback){
+
+function addCategoryDb(email, listIndex, categoryName) {
+	readFile(email, function(err, user) {
+
+
+		var categoryObj = {"name":categoryName,
+							"items":[]};
+
+		user.lists[listIndex].categories.push(categoryObj);
+
+		console.log(user.lists[0].categories);
+
+		updateDb(email, user)
+	})
+}
+
+function addUserDb(record,table, callback){
     MongoClient.connect(url, function(err, client) {
         if(err) {
 	    	console.log(err);
@@ -106,8 +122,9 @@ function addRecord(record,table, callback){
     	});
         client.close();
     });
-}   
-function deleteRecord(record,table, callback){
+}
+
+function deleteUserDb(record,table, callback){
     MongoClient.connect(url, function(err, client) {
         if(err) {
 	    	console.log(err);
@@ -131,8 +148,9 @@ function deleteRecord(record,table, callback){
 
 module.exports = {
 	readFile,
-	addRecord,
+	addUserDb,
 	updateDb,
-    deleteRecord,
-    dropCategory
+    deleteUserDb,
+    deleteCategoryDb,
+    addCategoryDb
 }
