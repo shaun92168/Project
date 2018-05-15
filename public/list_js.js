@@ -60,11 +60,10 @@ function addItem() {
 		// problem: can be number
 		if (myName === null && itemName.length > 0) {
 			var xhr = new XMLHttpRequest();
-			xhr.open('POST', '/add-new-item');
+			xhr.open('POST', '/addItem');
 			xhr.setRequestHeader('Content-Type', 'application/json');
 			xhr.onload = function() {
 		    if (xhr.status === 200) {
-		        console.log('added');
 			    var newElem = document.createElement('LI');
 				var newId = document.createTextNode(itemName)
 
@@ -80,7 +79,7 @@ function addItem() {
 		};
 
 	    	xhr.send(JSON.stringify({
-			    itemName: itemName,
+			    item: itemName,
 			    category: categoryName
 			}));
 
@@ -99,7 +98,20 @@ function delCategory() {
 	if (myCategory === null) {
 		alert('Category does not exist!')
 	} else { 
-		myCategory.parentNode.removeChild(myCategory);
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '/deleteItem');
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onload = function() {
+		    if (xhr.status === 200) {
+				myCategory.parentNode.removeChild(myCategory);
+		    } else {
+		        console.log('Error, not saved on the server');
+		    }
+		};
+
+    	xhr.send(JSON.stringify({
+		    category: categoryName
+		}));
 	}
 }
 

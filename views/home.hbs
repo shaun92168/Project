@@ -43,15 +43,11 @@
 
 				<div>
 					<ul class = "indent">
-					<div>
 					{{#each lists as |list|}}
 						<form action='/groceryListPage' method='get'>
-							<div><input class='item' type='submit' value='{{list.name}}'></div>
+							<div><input class='item' type='submit' value='{{list.name}}' name='test'></div>
 						</form>
-					{{else}}
-						<button><a href='/groceryListPage'>New List</a></button>
 					{{/each}}
-					</div>
 					</ul>
 				</div>
 			</div>
