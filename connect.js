@@ -1,6 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project'
-var fun = require('./functions.js')
 
 /** Connects to our mongo database and returns an active client and collection.
  * @param {callback} callback Sends a callback
