@@ -157,6 +157,7 @@ function deleteUserDB(record, table, callback) {
 
 module.exports = {
 	getListIndex,
+	getCategoryIndex,
 	readFile,
 	addUserDB,
 	updateDB,

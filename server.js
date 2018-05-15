@@ -133,7 +133,9 @@ app.post('/deleteItem', function(req, res) {
     var email = req.session.user.email
     var list = req.session.user.currentList
     var category = req.body.category
-    getDB.dropCategory(email, list, category)
+    getDB.deleteCategoryDB(email, list, category, (msg) => {
+        console.log(msg);
+    })
     res.send('ok')
 })
 
