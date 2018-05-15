@@ -60,8 +60,7 @@ function readFile(data, callback){
 
 
 // }
-function updateDb(email,data)
-{
+function updateDb(email,data){
 	MongoClient.connect(url, function(err, client) {
 		if(err) {
 	    	console.log(err);
@@ -76,13 +75,16 @@ function updateDb(email,data)
 	  });
 
 }
+
 function dropCategory(email, listIndex, categoryIndex){
 
     readFile(email, function(err, user) {
     	
     	delete user.lists[listIndex].categories[categoryIndex];
     	
-   		updateDb(email, user)
+   		updateDb(email, user, function(err, res){
+			console.log(err);
+		});
 
     })
 }
@@ -93,7 +95,7 @@ function addRecord(record,table, callback){
 		}
         const db = client.db('grocery_list_project')
 
-	    db.collection(table).insertOne(record, function(err, res) {
+	    collection(table).insertOne(record, function(err, res) {
         if (err){
             callback("error");
             throw err;
@@ -124,6 +126,7 @@ function deleteRecord(record,table, callback){
   client.close();
     });
 }
+
 
 
 module.exports = {

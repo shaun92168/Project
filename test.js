@@ -101,6 +101,18 @@ describe.skip("addRecord function testing", ()=>{
     });
 });
 
+describe.only("dropCategory function testing", ()=>{
+	test("delete category inside list", ()=>{
+		myDB.dropCategory(obj,"Categories", function(msg){
+			expect(msg).toBe("success");
+
+       })
+
+   });
+
+});
+        
+
 describe.skip("deleteRecord function testing", ()=>{
     test("added product to a list", ()=>{
         myDB.deleteRecord(obj,"Users", function(msg){
@@ -120,4 +132,49 @@ describe.only("list names testing", ()=>{
     test("a valid list name with case sensitive", ()=>{
         expect(listNameValidate("List")).toBe("list");
     });
+});
+
+var email = {"email":"brendon@1234"};
+
+var shaunObj = {
+    
+    "username": "shaun",
+    "email": "shaun@1234",
+    "password": "1234",
+    "lists": [
+        {
+            "name": "grocery list",
+            "categories": [
+                {
+                    "name": "Produce",
+                    "items": [
+                        "brocoli",
+                        "pear",
+                        "orange"
+                    ]
+                },
+                {
+                    "name": "Vegetables",
+                    "items": [
+                        "carrot",
+                        "lettuce",
+                        "eggplant"
+                    ]
+                },
+                {
+                    "name": "Dairy",
+                    "items": [
+                        "milk",
+                        "creamer"
+                    ]
+                }
+            ]
+        }
+    ]
+};
+
+describe.only("updateDB testing", ()=>{
+	test("update brendon@1234 to shaun@1234", ()=>{
+		myDB.updateDb(email, shaunObj)
+	}); 
 });
