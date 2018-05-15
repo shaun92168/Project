@@ -40,8 +40,26 @@ function readFile(data, callback){
 	});
 }
 
+// function dropCategory(user,list,category){
+// 	MongoClient.connect(url, function(err, client) {
+// 		if(err) {
+// 	    	console.log(err);
+// 		}
+// 	const db = client.db('grocery_list_project')
+// 	const collection = db.collection('Users')
+// 	var myObj = collection.find({'user':user});
+// 	//the indexes shouldnt be 0 they need to be the index of the thing were passing in
+// 	var check = myObj.lists.indexOf(list);
+// 	var secondIndex = myObj.lists[check].category.indexOf(category);
+// 	if(check!=-1 && secondIndex!= -1 )
+// 	{
+// 		delete myObj.lists.[check].category[secondIndex];
+// 		db.collection.replaceOne({'user':user,myObj)
+// 	}
+// 	//then have to update the collection
 
 
+// }
 function updateDb(email,data)
 {
 	MongoClient.connect(url, function(err, client) {
@@ -56,9 +74,9 @@ function updateDb(email,data)
 
 	  	client.close();
 	  });
-
 }
-function dropCategory(email, listIndex, categoryIndex){
+
+function deleteCategoryDb(email, listIndex, categoryIndex){
 
     readFile(email, function(err, user) {
     	
@@ -67,10 +85,24 @@ function dropCategory(email, listIndex, categoryIndex){
    		updateDb(email, user)
 
     })
-
 }
 
-function addRecord(record,table, callback){
+function addCategoryDb(email, listIndex, categoryName) {
+	readFile(email, function(err, user) {
+
+
+		var categoryObj = {"name":categoryName,
+							"items":[]};
+
+		user.lists[listIndex].categories.push(categoryObj);
+
+		console.log(user.lists[0].categories);
+
+		updateDb(email, user)
+	})
+}
+
+function addUserDb(record,table, callback){
     MongoClient.connect(url, function(err, client) {
         if(err) {
 	    	console.log(err);
@@ -88,8 +120,9 @@ function addRecord(record,table, callback){
     	});
         client.close();
     });
-}   
-function deleteRecord(record,table, callback){
+}
+
+function deleteUserDb(record,table, callback){
     MongoClient.connect(url, function(err, client) {
         if(err) {
 	    	console.log(err);
@@ -112,9 +145,9 @@ function deleteRecord(record,table, callback){
 
 module.exports = {
 	readFile,
-	addRecord,
+	addUserDb,
 	updateDb,
-    deleteRecord,
-	dropCategory
+    deleteUserDb,
+    deleteCategoryDb,
+    addCategoryDb
 }
-
