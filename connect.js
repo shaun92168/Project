@@ -64,39 +64,6 @@ function readFile(email, callback){
 	});
 }
 
-<<<<<<< HEAD
-// function dropCategory(user,list,category){
-// 	MongoClient.connect(url, function(err, client) {
-// 		if(err) {
-// 	    	console.log(err);
-// 		}
-// 	const db = client.db('grocery_list_project')
-// 	const collection = db.collection('Users')
-// 	var myObj = collection.find({'user':user});
-// 	//the indexes shouldnt be 0 they need to be the index of the thing were passing in
-// 	var check = myObj.lists.indexOf(list);
-// 	var secondIndex = myObj.lists[check].category.indexOf(category);
-// 	if(check!=-1 && secondIndex!= -1 )
-// 	{
-// 		delete myObj.lists.[check].category[secondIndex];
-// 		db.collection.replaceOne({'user':user,myObj)
-// 	}
-// 	//then have to update the collection
-
-
-// }
-function updateDb(email,data){
-	MongoClient.connect(url, function(err, client) {
-		if(err) {
-	    	console.log(err);
-		}
-
-	  	const db = client.db('grocery_list_project')
-	  	const collection = db.collection('Users')
-
-	  	collection.replaceOne(email, data);
-
-=======
 /** replaces the old database document with a new one.
  * @param {string} email The email address
  * @param {JSON} data The data to be uploaded to the database
@@ -104,16 +71,10 @@ function updateDb(email,data){
 function updateDB(email, data) {
 	connectDB(function(collection, db, client) {
 		collection.replaceOne(email, data);
->>>>>>> upstream/master
 	  	client.close();
 	})
 }
 
-<<<<<<< HEAD
-
-function deleteCategoryDb(email, listIndex, categoryIndex){
-
-=======
 /** Deletes a users specified category from the database.
  * @param {string} email The email address
  * @param {string} list The list you are deleting a category from
@@ -121,22 +82,14 @@ function deleteCategoryDb(email, listIndex, categoryIndex){
  * @param {callback} callback Sends a callback
  */
 function deleteCategoryDB(email, list, category, callback) {
->>>>>>> upstream/master
     readFile(email, function(err, user) {
     	var listIndex = getListIndex(list, user);
     	var categoryIndex = getCategoryIndex(list, category, user);
 
     	// fix so it doesnt leave a null
     	delete user.lists[listIndex].categories[categoryIndex];
-<<<<<<< HEAD
-    	
-   		updateDb(email, user, function(err, res){
-			console.log(err);
-		});
-=======
     	console.log(user.lists[0]);
    		// updateDb(email, user)
->>>>>>> upstream/master
 
    		callback('success')
     });
@@ -163,26 +116,6 @@ function addCategoryDB(email, listIndex, categoryName) {
 	});
 }
 
-<<<<<<< HEAD
-function addUserDb(record,table, callback){
-    MongoClient.connect(url, function(err, client) {
-        if(err) {
-	    	console.log(err);
-		}
-        const db = client.db('grocery_list_project')
-
-	    collection(table).insertOne(record, function(err, res) {
-        if (err){
-            callback("error");
-            throw err;
-        } else {
-    	    console.log("1 document inserted");
-            callback("success");
-        }
-    	});
-        client.close();
-    });
-=======
 /** Adds a new user document to the database and returns a callback either 'error' or 'success'
  * @param {JSON} record The new users data to add to the database
  * @param {string} table the collection name
@@ -201,7 +134,6 @@ function addUserDB(record, table, callback) {
 		    client.close();
    		});
 	});
->>>>>>> upstream/master
 }
 
 /** Deletes a user document from the database and returns a callback with either 'error' or '1 document deleted'
@@ -224,11 +156,6 @@ function deleteUserDB(record, table, callback) {
 	});
 }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> upstream/master
 module.exports = {
 	getListIndex,
 	readFile,

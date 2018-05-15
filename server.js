@@ -48,6 +48,21 @@ app.post('/login', function(req, res) {
     });
 });
 
+app.post('/signupPage', function (req, res) {
+    var user = {
+        "first": req.body.Fname,
+        "last": req.body.Lname,
+        "email": req.body.Uemail,
+        "password": req.body.Pass,
+        "list":[]
+    };
+    getDB.addUserDB(user, "Users", function(err, res){
+        if(err) throw (err);
+        req.session.user = email;
+        res.send('account create successfully!');
+    });
+});
+
 // Renders the login page
 app.get('/', (request, response) => {
     response.render('login.hbs')
@@ -158,7 +173,3 @@ app.listen(port, () => {
  * For Unit Testing
  */
 // module.exports = app;
-
-module.exports = {
-    login
-}
