@@ -113,6 +113,60 @@ function updateDB(email, data) {
 	connectDB((collection, db, client) => {
 		collection.replaceOne({email: email}, data);
 	  	client.close();
+	})
+}
+
+/** Adds a new list to a users file and saves it to the database 
+ * @param {string} email The users email address
+ * @param {string} list The new lists name
+ */
+function addListDB(email, list) {
+	readFile(email, (err, user) => {
+		user.lists.push({name: list})
+		updateDB(email, user)
+	})
+}
+
+/** Deletes a users specified category from the database.
+ * @param {string} email The email address
+ * @param {string} list The list you are deleting a category from
+ * @param {string} category The category you wish to delete
+ * @param {callback} callback Sends a callback
+ */
+function deleteCategoryDB(email, list, category, callback) {
+    readFile(email, (user) => {
+    	var listIndex = getListIndex(list, user);
+    	var categoryIndex = getCategoryIndex(list, category, user);
+
+    	user.lists[listIndex].categories.splice(categoryIndex,1);
+   		updateDB(email, user)
+
+   		callback('success')
+    });
+}
+
+
+
+// tests drop category function
+// deleteCategoryDB('nick@123.ca', 'grocery list', 'Produce', (msg) => {
+// 	console.log(msg)
+// })
+
+
+/** Adds a category to the specified list and saves it to database
+ * @param {string} email The email address
+ * @param {int} listIndex The index number for the list you are editing
+ * @param {string} categoryName The name for the category you want to add
+ */
+function addCategoryDB(email, listIndex, categoryName) {
+	readFile(email, (user) => {
+		var categoryObj = {"name": categoryName, "items": [] };
+
+		user.lists[listIndex].categories.push(categoryObj);
+		console.log(user.lists[0].categories);
+
+		updateDB(email, user)
+
 	});
 }
 
@@ -154,6 +208,27 @@ function deleteUserDB(record, table, callback) {
 	        client.close();
   		});
 	});
+}
+function addItemDB(email, list, category, item, callback) {
+
+	readFile(email, (user) => {
+
+		var listIndex = getListIndex(list, user);
+
+		var categoryIndex = getCategoryIndex(list, category, user);
+
+
+
+		user.lists[listIndex].categories[categoryIndex].items.push(item)
+
+		updateDB(email, user);
+
+
+
+		callback('success');
+
+	});
+
 }
 
 /** Adds a new list to a users file and saves it to the database 
@@ -263,10 +338,32 @@ module.exports = {
 	updateDB,
 	addUserDB,
     deleteUserDB,
-    addListDB,
-    deleteListDB,
-    addCategoryDB,
     deleteCategoryDB,
+    addCategoryDB,
     addItemDB,
-    deleteItemDB
+    addListDB,
+    deleteItemDB,
+    deleteListDB
+
 }
+
+
+	
+
+
+// henrys unittest example to me (nick)
+// var obj = {
+// 	id:expect.anything(),
+// 	name:expect.anything()
+// }
+
+// test("dbRead", (done)=>{
+// 	readFile({data:"stuff"}, (err, data)=>{
+// 		expect(data).toBe("failed");
+// 		expect(data).toEqual(obj);
+// 		done();
+// 	})
+// })
+
+
+
