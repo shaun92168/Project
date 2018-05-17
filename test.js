@@ -102,3 +102,11 @@ describe("readFile testing", () => {
         })
     });
 });
+
+describe("addListDB function testing", () => {
+    test("adding a list inside user", () => {
+        myDB.addListDB('nick@123.ca', 'electronic list', (msg) => {
+            expect(msg).toBe("success");
+        });
+    });
+});
