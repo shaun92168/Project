@@ -127,3 +127,12 @@ describe.skip("updateDB testing", ()=>{
 	}); 
 });
 
+/*
+describe("signup test"), ()=>{
+    test("add user shauntseng", ()=>{
+        server.signup("shauntseng", "shaun@123.ca", "123", "123", (msg)=>{
+            expect(msg).toBe("success");
+        })
+    }); 
+}
+*/

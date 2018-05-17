@@ -53,6 +53,36 @@ function login(email, password, callback) {
     }
 }
 
+/**
+ * This add the user to the database
+ * @name signup
+ * @function
+ * @param {string} username
+ * @param {string} email
+ * @param {string} password
+ * @param {string} repassword
+ * @param {callback} callback
+ */
+function signup(username, email, password, repassword, callback) {
+    if (email.indexOf('@') > 0 && email.indexOf('.') > 0 && (email.indexOf('com') > 0 || email.indexOf('ca') > 0) && (password === repassword)) {
+        var user = {
+                    "username": username,
+                    "email": email,
+                    "password": password,
+                    "list":[]
+                };
+        getDB.addUserDB(user, "Users", (msg) => {
+            if(msg === 'error') {
+                callback('failed')
+            } else {
+                callback('success')
+            }
+        }); 
+    } else {
+        callback('failed')
+    }
+}
+
 app.post('/login', function(req, res) {
     login(req.body.email, req.body.password, (err, user) => {
         if (user === 'failed') {
@@ -66,18 +96,17 @@ app.post('/login', function(req, res) {
     });
 });
 
-app.post('/signupPage', function (req, res) {
-    var user = {
-        "first": req.body.Fname,
-        "last": req.body.Lname,
-        "email": req.body.Uemail,
-        "password": req.body.Pass,
-        "list":[]
-    };
-    getDB.addUserDB(user, "Users", function(err, res){
-        if(err) throw (err);
-        req.session.user = email;
-        res.send('account create successfully!');
+app.post('/signup', function (req, res) {
+    console.log("post")
+    signup(req.body.username, req.body.email, req.body.password, req.body.repassword, (msg) => {
+        if (msg === 'failed') {
+            res.render('signup.hbs', {
+                error: 'try again'
+            });
+        } else {
+            req.session.msg = msg
+            res.redirect('/homePage')
+        }
     });
 });
 
@@ -87,7 +116,7 @@ app.get('/', (request, response) => {
 });
 
 // Renders the signup page
-app.get('/SignupPage', (request, response) => {
+app.get('/signup', (request, response) => {
     response.render('Signup.hbs')
 });
 

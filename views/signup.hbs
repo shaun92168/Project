@@ -10,28 +10,30 @@
         <!-- <h1> Quicklist </h1> -->
         
         <div id="signupscreen">
-            <label for="first name"> First name </label> </br>
-            <input type="text" id="Fname" name="First name" class="txt" >
-            </br> </br>  
-       
-            <label for="last name"> Last name </label> </br>
-            <input type="text" id="Lname" name ="Last name" class="txt">
-            </br> </br>
-       
-            <label for="email"> Email </label> </br>
-            <input type="email"  id="Uemail" class="txt">
-            </br> </br>
-        
-            <label for="password"> Password </label> </br>
-            <input type="password" id="Pass" class="txt"> 
-            </br> </br>
-       
-            <input type="submit" value="Create Account" id="createacc"> </br>
-            <p id="haveacc"> Have an account? </p> </br> &nbsp
-            <a href="/" id="signup"> Log in instead! </a>
-     
+            <form action="/signup" method="post">
+                <label for="username"> Username </label> </br>
+                <input type="text" id="username" name="username" class="txt" >
+                </br> </br>  
+           
+                <label for="email"> Email </label> </br>
+                <input type="email"  id="email" name="email" class="txt">
+                </br> </br>
+            
+                <label for="password"> Password </label> </br>
+                <input type="password" id="password" name="password" class="txt"> 
+                </br> </br>
+
+                <label for="repassword"> Re-enter Password </label> </br>
+                <input type="password" id="repassword" name="repassword" class="txt"> 
+                </br> </br>
+           
+                <input type="submit" value="Create Account" id="createacc"> </br>
+                <p id="haveacc"> Have an account? </p> </br> &nbsp
+                <a href="/" id="signup"> Log in instead! </a>
+            </form>
         </div>
-    
+
+    <script src='/signup.js'></script>
     </body>
     
 </html>
