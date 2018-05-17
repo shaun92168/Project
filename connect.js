@@ -128,6 +128,14 @@ function deleteCategoryDB(email, list, category, callback) {
     });
 }
 
+
+
+// tests drop category function
+// deleteCategoryDB('nick@123.ca', 'grocery list', 'Produce', (msg) => {
+// 	console.log(msg)
+// })
+
+
 /** Adds a category to the specified list and saves it to database
  * @param {string} email The email address
  * @param {int} listIndex The index number for the list you are editing
@@ -170,6 +178,7 @@ function addUserDB(record, table, callback) {
  */
 function deleteUserDB(record, table, callback) {
 	connectDB(function(collection, db, client) {
+
 	    db.collection(table).deleteOne(record, function(err, res) {
 	        if (err){
 	            callback("error");
@@ -180,6 +189,27 @@ function deleteUserDB(record, table, callback) {
 	        client.close();
   		});
 	});
+}
+function addItemDB(email, list, category, item, callback) {
+
+	readFile(email, (user) => {
+
+		var listIndex = getListIndex(list, user);
+
+		var categoryIndex = getCategoryIndex(list, category, user);
+
+
+
+		user.lists[listIndex].categories[categoryIndex].items.push(item)
+
+		updateDB(email, user);
+
+
+
+		callback('success');
+
+	});
+
 }
 
 /** Adds a new list to a users file and saves it to the database 
@@ -216,9 +246,15 @@ module.exports = {
     deleteUserDB,
     deleteCategoryDB,
     addCategoryDB,
+    addItemDB,
     addListDB,
     deleteListDB
+
 }
+
+
+	
+
 
 // henrys unittest example to me (nick)
 // var obj = {
@@ -233,3 +269,4 @@ module.exports = {
 // 		done();
 // 	})
 // })
+
