@@ -187,3 +187,16 @@ describe.skip("deleteCategoryDB function testing", () => {
         });
     });
 });
+describe.skip("deleteItem function testing", ()=>{
+    test("delete item from category", ()=>{
+        myDB.deleteItemDB('brendon@1234', "grocery list", "Produce", "orange", (msg) =>{
+            expect(msg).toBe("Success");
+        });
+    });
+});
+describe("getItemIndex function testing", () => {
+    test("get index of item in category", () => {
+        expect(myDB.getItemIndex('grocery list', 'Produce', "pear", obj)).toBe(1)
+    });
+
+});
