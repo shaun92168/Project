@@ -1,18 +1,41 @@
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project'
 
+/** Verifiys the that the inputted email and password are correct format and match the ones in the database.
+ * @param {string} email The users email address
+ * @param {string} password The users password
+ * @param {callback} callback Sends a callback
+ */
+function login(email, password, callback) {
+    if (email.indexOf('@') > 0 && email.indexOf('.') > 0 && (email.indexOf('com') > 0 || email.indexOf('ca') > 0)) {
+        readFile(email, (user) => {
+            if(user === 'failed') {
+                callback('failed')
+            } else {
+                if (password === user.password) {
+                    callback(user)
+                } else {
+                    callback('failed')
+                }
+            }
+        }); 
+    } else {
+        callback('failed')
+    }
+}
+
 /** Connects to our mongo database and returns an active client and collection.
  * @param {callback} callback Sends a callback
  */
 function connectDB(callback) {
 	MongoClient.connect(url, function(err, client) {
         if(err) {
-            console.log(err);
+            throw err;
+        } else {
+        	var db = client.db('grocery_list_project')
+		    var collection = db.collection('Users')
+		    callback(collection, db, client)
         }
-	    var db = client.db('grocery_list_project')
-	    var collection = db.collection('Users')
-
-	    callback(collection, db, client)
 	});
 }
 
@@ -53,10 +76,12 @@ function getCategoryIndex(list, category, data) {
 function readFile(email, callback){
 	connectDB(function(collection, db, client) {
 		collection.findOne({email: email}, function(err, user) {
-			if(!user) {
-				callback(err, 'failed');
+			if (err) {
+				throw err;
+			} else if (!user) {
+				callback('failed');
 			} else {
-				callback(err, user);
+				callback(user);
 			}
 			client.close();
 		});
@@ -68,7 +93,7 @@ function readFile(email, callback){
  * @param {JSON} data The data to be uploaded to the database
  */
 function updateDB(email, data) {
-	connectDB(function(collection, db, client) {
+	connectDB((collection, db, client) => {
 		collection.replaceOne(email, data);
 	  	client.close();
 	})
@@ -92,23 +117,16 @@ function addListDB(email, list) {
  * @param {callback} callback Sends a callback
  */
 function deleteCategoryDB(email, list, category, callback) {
-    readFile(email, function(err, user) {
+    readFile(email, (user) => {
     	var listIndex = getListIndex(list, user);
     	var categoryIndex = getCategoryIndex(list, category, user);
 
-    	// fix so it doesnt leave a null
-    	delete user.lists[listIndex].categories[categoryIndex];
-    	console.log(user.lists[0]);
-   		// updateDb(email, user)
+    	user.lists[listIndex].categories.splice(categoryIndex,1);
+   		updateDB(email, user)
 
    		callback('success')
     });
 }
-
-// tests drop category function
-// deleteCategoryDB('nick@123.ca', 'grocery list', 'Produce', (msg) => {
-// 	console.log(msg)
-// })
 
 /** Adds a category to the specified list and saves it to database
  * @param {string} email The email address
@@ -116,13 +134,13 @@ function deleteCategoryDB(email, list, category, callback) {
  * @param {string} categoryName The name for the category you want to add
  */
 function addCategoryDB(email, listIndex, categoryName) {
-	readFile(email, function(err, user) {
+	readFile(email, (user) => {
 		var categoryObj = {"name": categoryName, "items": [] };
 
 		user.lists[listIndex].categories.push(categoryObj);
 		console.log(user.lists[0].categories);
 
-		updateDb(email, user)
+		updateDB(email, user)
 	});
 }
 
@@ -138,7 +156,6 @@ function addUserDB(record, table, callback) {
 		        callback("error");
 		        throw err;
 		    } else {
-			    console.log("1 document inserted");
 		        callback("success");
 		    }
 		    client.close();
@@ -158,15 +175,39 @@ function deleteUserDB(record, table, callback) {
 	            callback("error");
 	            throw err;
 	        } else {
-	            console.log("1 document deleted");
 	            callback("success");
 	        }
+	        client.close();
   		});
-  		client.close();
 	});
 }
 
+/** Adds a new list to a users file and saves it to the database 
+ * @param {string} email The users email address
+ * @param {string} list The new lists name
+ */
+function addListDB(email, list) {
+	readFile(email, (user) => {
+		user.lists.push({name: list})
+		updateDB(email, user)
+	})
+}
+
+/** deletes a list from the users file and saves the change to the database
+ * @param {string} email The users email address
+ * @param {string} list The name of the list to be deleted
+ */
+function deleteListDB(email, list, callback) {
+	readFile(email, (user) => {
+		listIndex = getListIndex(list, user)
+		user.lists.splice(listIndex)
+		updateDB(email, user)
+		callback('success')
+	})
+}
+
 module.exports = {
+	login,
 	getListIndex,
 	getCategoryIndex,
 	readFile,
@@ -175,7 +216,8 @@ module.exports = {
     deleteUserDB,
     deleteCategoryDB,
     addCategoryDB,
-    addListDB
+    addListDB,
+    deleteListDB
 }
 
 // henrys unittest example to me (nick)

@@ -2,9 +2,9 @@ var myDB = require("./connect");
 // var server = require("./server.js")
 var obj = {
    
-    "username": "brendon1",
-    "email": "brendon@1234",
-    "password": "1234",
+    "username": "tester",
+    "email": "test@1.ca",
+    "password": "1",
     "lists": [
         {
             "name": "grocery list",
@@ -45,33 +45,25 @@ describe("addRecord function testing", ()=>{
     });
 });
 
-describe.skip("deleteRecord function testing", ()=>{
-    test("deleted product from a list", ()=>{
-        myDB.deleteUserDB(obj, "Users", function(msg){
-            expect(msg).toBe("success");
-        });
-    });
-});
-
-describe("dropCategory function testing", () => {
+describe("deleteCategoryDB function testing", () => {
     test("delete category inside list", () => {
-        myDB.deleteCategoryDB('nick@123.ca', 'grocery list', 'Produce', (msg) => {
+        myDB.deleteCategoryDB('test@1.ca', 'grocery list', 'Produce', (msg) => {
             expect(msg).toBe("success");
         });
     });
 });
 
-describe.skip("login validation testing.", () => {
+describe("login validation testing.", () => {
     test("email should be proper email format.", () => {
-        server.login('nick123.com', '123', (user) => {
+        myDB.login('nick123.com', '123', (user) => {
             expect(user).toBe('failed');
         });
 
-        server.login('nick@123', '123', (user) => {
+        myDB.login('nick@123', '123', (user) => {
             expect(user).toBe('failed');
         });
 
-        server.login('nick@123com', '123', (user) => {
+        myDB.login('nick@123com', '123', (user) => {
             expect(user).toBe('failed');
         });
     });
@@ -91,22 +83,38 @@ describe("getCategoryIndex testing", () => {
 
 describe("readFile testing", () => {
     test("should return an error message", () => {
-        myDB.readFile('nick@1a', (err, user) => {
+        myDB.readFile('nick@1a', (user) => {
             expect(user).toBe('failed')
         });
     });
 
     test("Should return a file with the same email inputted", () => {
-        myDB.readFile('nick@123.ca', (err, user) => {
+        myDB.readFile('nick@123.ca', (user) => {
             expect(user.email).toBe('nick@123.ca')
         })
     });
 });
 
-describe("addListDB function testing", () => {
-    test("adding a list inside user", () => {
-        myDB.addListDB('nick@123.ca', 'electronic list', (msg) => {
+describe("deleteListDB testing", () => {
+    test("Should return 'success'", () => {
+        myDB.deleteListDB('test@1.ca', 'grocery list', (msg) => {
+            expect(msg).toBe('success')
+        });
+    });
+});
+
+describe("deleteRecord function testing", ()=>{
+    test("deleted product from a list", ()=>{
+        myDB.deleteUserDB(obj, "Users", function(msg){
             expect(msg).toBe("success");
         });
+    });
+});
+
+describe("addListDB function testing", () => {
+    test("adding a list inside user", () => {
+       myDB.addListDB('nick@123.ca', 'electronic list', (msg) => {
+            expect(msg).toBe('success')
+       });
     });
 });
