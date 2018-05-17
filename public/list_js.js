@@ -49,7 +49,7 @@ function addCategory() {
 				newList.id = newCategory;
 				document.getElementById('categories').appendChild(newList);
 			} else {
-			    alert('Error: change not saved, please try again.');
+			    swal('Error: change not saved, please try again.');
 			}
 		};
     	xhr.send(JSON.stringify({
@@ -65,7 +65,7 @@ function delCategory() {
 	var categoryName = document.getElementById('chooseCategory').value
 	var myCategory = document.getElementById(categoryName)
 	if (myCategory === null) {
-		alert('Category does not exist!')
+		swal('Category does not exist!')
 	} else { 
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', '/deleteCategory');
@@ -74,7 +74,7 @@ function delCategory() {
 		    if (xhr.status === 200) {
 				myCategory.parentNode.removeChild(myCategory);
 			} else {
-			    alert('Error: change not saved, please try again.');
+			    swal('Error: change not saved, please try again.');
 			}
 		};
     	xhr.send(JSON.stringify({
@@ -93,7 +93,7 @@ function addItem() {
 	var myCategory = document.getElementById(categoryName)
 	var myName = document.getElementById(itemName)	
 	if (myCategory === null) {
-		alert('Category does not exist!')
+		swal('Category does not exist!')
 	} else {
 		// problem: can be number
 		if (myName === null && itemName.length > 0) {
@@ -118,7 +118,7 @@ function addItem() {
 			    category: categoryName
 			}));
 		} else {
-			alert('Cant add item!')
+			swal('Cant add item!')
 		}
 	}
 }
@@ -131,7 +131,7 @@ function delItem() {
 	var itemName = document.getElementById('chooseItem').value
 	var myItem = document.getElementById(itemName)
 	if (myItem === null) {
-		alert('Item does not exist!')
+		swal('Item does not exist!')
 	} else { 
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', '/deleteItem');
@@ -140,7 +140,7 @@ function delItem() {
 		    if (xhr.status === 200) {
 				myItem.parentNode.removeChild(myItem);
 		    } else {
-		        alert('Error, not saved on the server');
+		        swal('Error, not saved on the server');
 		    }
 		}
     	xhr.send(JSON.stringify({
@@ -150,38 +150,6 @@ function delItem() {
 	}
 }
 
-/**
- * This function adds a new list
- */
-function newList() {
-	var chooseListInput = document.getElementById('chooseList');
-	var listName = chooseListInput.value;
-	chooseListInput.value = '';
-	chooseListInput.focus();
-	var myElem = document.getElementById(listName);
-	if (myElem === null) {
-		var newElem = document.createElement('form');
-		var newElem2 = document.createElement('li')
-		var newElem3 = document.createElement('input')
-		var newId = document.createTextNode(listName);
-		newElem.appendChild(newElem2);
-		newElem2.appendChild(newElem3);
-		newElem3.value = listName;
-		newElem3.type = 'submit';
-		newElem.action = '/listsPage/' + listName;
-		//newElem2.appendChild(newId)
-		newElem.id = listName;
-		document.getElementById('lists').appendChild(newElem);
-	}
-}
-
-
-var newAddButton = document.getElementById('addList');
-if(newAddButton) {
-	newAddButton.addEventListener('click', function() {
-		newList();
-	});	
-};
 
 document.getElementById('newCategory').addEventListener('click', function() {
 	addCategory();

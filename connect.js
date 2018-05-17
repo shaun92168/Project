@@ -270,20 +270,3 @@ module.exports = {
     addItemDB,
     deleteItemDB
 }
-
-	
-
-
-// henrys unittest example to me (nick)
-// var obj = {
-// 	id:expect.anything(),
-// 	name:expect.anything()
-// }
-
-// test("dbRead", (done)=>{
-// 	readFile({data:"stuff"}, (err, data)=>{
-// 		expect(data).toBe("failed");
-// 		expect(data).toEqual(obj);
-// 		done();
-// 	})
-// })
