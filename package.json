@@ -4,6 +4,7 @@
   "description": "Create and edit a shopping list.",
   "main": "index.js",
   "scripts": {
+    "test": "jest --coverage test.js",
     "test": "jest test",
     "start": "node server.js"
   },
