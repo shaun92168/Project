@@ -11,7 +11,6 @@ const fs = require('fs');
 const port = process.env.PORT || 8080;
 
 var app = express();
-
 var session = require('client-sessions');
 var getDB = require('./connect.js');
 
@@ -68,7 +67,7 @@ app.get('/SignupPage', (request, response) => {
 app.get('/homePage', function(req, res) {
     if(req.session && req.session.user){
         res.render('home.hbs', {
-            email: req.session.user.email,
+            username: req.session.user.username,
             lists: req.session.user.lists
         });
     } else {
@@ -106,20 +105,51 @@ app.get('/listsPage/:listname', function(req, res) {
     }
 });
 
-app.post('/addItem', function(req, res) {
-    console.log(req.body)
-    res.send('ok')
+app.post('/addCategory', (req, res) => {
+    var email = req.session.user.email
+    var list = req.session.user.currentList
+    var category = req.body.category
+    getDB.addCategoryDB(email, list, category, (msg) => {
+        if (msg === 'success') {
+            res.send('ok')
+        }
+    });
 });
 
-app.post('/deleteItem', function(req, res) {
+app.post('/deleteCategory', (req, res) => {
     var email = req.session.user.email
     var list = req.session.user.currentList
     var category = req.body.category
     getDB.deleteCategoryDB(email, list, category, (msg) => {
-        console.log(msg);
-    })
-    res.send('ok')
-})
+        if (msg === 'success') {
+            res.send('ok');
+        }
+    });
+});
+
+app.post('/addItem', (req, res) => {
+    var email = req.session.user.email
+    var list = req.session.user.currentList
+    var category = req.body.category
+    var item = req.body.item
+    getDB.addItemDB(email, list, category, item, (msg) => {
+        if (msg === 'success') {
+            res.send('ok');
+        }
+    });
+});
+
+app.post('/deleteItem', (req, res) => {
+    var email = req.session.user.email
+    var list = req.session.user.currentList
+    var category = req.body.category
+    var item = req.body.item
+    getDB.deleteItemDB(email, list, category, item, (msg) => {
+        if (msg === 'success') {
+            res.send('ok');
+        }
+    });
+});
 
 /** User input what grocery items they want and then click a button. 
 The webpage then requests information from the database, which then response by sending that information back to the webpage. 
