@@ -34,36 +34,6 @@ app.use(session({
     activeDuration: 2 * 60 * 1000
 }));
 
-/**
- * This add the user to the database
- * @name signup
- * @function
- * @param {string} username
- * @param {string} email
- * @param {string} password
- * @param {string} repassword
- * @param {callback} callback
- */
-function signup(username, email, password, repassword, callback) {
-    if (email.indexOf('@') > 0 && email.indexOf('.') > 0 && (email.indexOf('com') > 0 || email.indexOf('ca') > 0) && (password === repassword)) {
-        var user = {
-                    "username": username,
-                    "email": email,
-                    "password": password,
-                    "list":[]
-                };
-        getDB.addUserDB(user, "Users", (msg) => {
-            if(msg === 'error') {
-                callback('failed')
-            } else {
-                callback('success')
-            }
-        }); 
-    } else {
-        callback('failed')
-    }
-}
-
 app.post('/login', function(req, res) {
     getDB.login(req.body.email, req.body.password, (user) => {
         if (user === 'failed') {
@@ -78,12 +48,9 @@ app.post('/login', function(req, res) {
 });
 
 app.post('/signup', function (req, res) {
-    console.log("post")
-    signup(req.body.username, req.body.email, req.body.password, req.body.repassword, (msg) => {
+    getDB.signup(req.body.username, req.body.email, req.body.password, req.body.repassword, (msg) => {
         if (msg === 'failed') {
-            res.render('signup.hbs', {
-                error: 'try again'
-            });
+            //res.render('signup.hbs')
         } else {
             req.session.msg = msg
             res.redirect('/homePage')

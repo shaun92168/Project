@@ -1,31 +1,16 @@
-function checkSignUp(){
-	console.log("checkSignUp")
+document.getElementById("createacc").addEventListener("click", function(){
 	var username = document.getElementById('username').value
 	var email = document.getElementById('email').value;
 	var password = document.getElementById('password').value;
 	var repassword = document.getElementById('repassword').value;
-
-	if(username === ""){
-		alert("username cannot be empty")
-	}
-
-	if(password === ""){
-		alert("password cannot be empty")
-	}
-
-	if(repassword === ""){
-		alert("Re-enter Password cannot be empty")
-	}
-
-	if (email.indexOf('@') > 0 && email.indexOf('.') > 0 && (email.indexOf('com') > 0 || email.indexOf('ca') > 0)) {
-		if(password != repassword){
-			alert("Passwords don't match")
+	
+	var msg = checkSignUp(username, email, password, repassword);
+	if (msg != "Account Created!"){
+		swal(msg);
+		document.getElementById('password').value = "";
+		document.getElementById('repassword').value = "";
+		if(msg === "Email format incorrect"){
+			document.getElementById('email').value = "";
 		}
-	} else {
-		alert("Email format incorrect")
 	}
-}
-
-document.getElementById("createacc").addEventListener("click", function(){
-	checkSignUp();
 });
