@@ -24,6 +24,36 @@ function login(email, password, callback) {
     }
 }
 
+/**
+ * This add the user to the database
+ * @name signup
+ * @function
+ * @param {string} username
+ * @param {string} email
+ * @param {string} password
+ * @param {string} repassword
+ * @param {callback} callback
+ */
+function signup(username, email, password, repassword, callback) {
+    if (email.indexOf('@') > 0 && email.indexOf('.') > 0 && (email.indexOf('com') > 0 || email.indexOf('ca') > 0) && (password === repassword) && (password != "") && (username != "")) {
+        var user = {
+                    "username": username,
+                    "email": email,
+                    "password": password,
+                    "list":[]
+                };
+        addUserDB(user, "Users", (msg) => {
+            if(msg === 'error') {
+                callback('failed')
+            } else {
+                callback('success')
+            }
+        }); 
+    } else {
+        callback('failed')
+    }
+}
+
 /** Connects to our mongo database and returns an active client and collection.
  * @param {callback} callback Sends a callback
  */
@@ -331,6 +361,7 @@ function deleteItemDB(email, list, category, item, callback) {
 
 module.exports = {
 	login,
+	signup,
 	getListIndex,
 	getCategoryIndex,
 	getItemIndex,
