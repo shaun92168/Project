@@ -101,6 +101,10 @@ app.get('/signup', (request, response) => {
     response.render('Signup.hbs')
 });
 
+app.get('/maps',(request,response)=>{
+	response.render('maps.hbs')
+});
+
 /**
  * This takes the username and go to the home page at home.hbs
  * @name homePage
