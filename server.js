@@ -34,7 +34,14 @@ app.use(session({
     activeDuration: 2 * 60 * 1000
 }));
 
-
+/**
+ * This add the user to the database
+ * @name login
+ * @function
+ * @param {string} email
+ * @param {string} password
+ * @param {callback} callback
+ */
 function login(email, password, callback) {
     if (email.indexOf('@') > 0 && email.indexOf('.') > 0 && (email.indexOf('com') > 0 || email.indexOf('ca') > 0)) {
         getDB.readFile(email, (err, user) => {
