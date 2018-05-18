@@ -28,7 +28,7 @@ function checkSignUp(username, email, password, repassword){
 		return "Re-enter Password cannot be empty"
 	}
 
-	if (email.indexOf('@') > 0 && email.indexOf('.') > 0 && (email.indexOf('com') > 0 || email.indexOf('ca') > 0)) {
+	if(email.indexOf('@') > 0 && email.lastIndexOf('.') > email.indexOf('@')  && (email.lastIndexOf('com') > email.indexOf('@') || email.lastIndexOf('ca') > email.indexOf('@')) && email.indexOf('@') === email.lastIndexOf('@')) {
 		if(password != repassword){
 			//alert("Passwords don't match")
 			return "Passwords don't match"

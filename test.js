@@ -238,6 +238,11 @@ describe("signup function testing", () => {
             expect(msg).toBe("failed");
         });
     });
+    test("sign up with incorrect email format", () => {
+        myDB.signup("testuser", "testuser.ca@123", "123", "123", (msg) => {
+            expect(msg).toBe("failed");
+        });
+    });
     test("sign up with incorrect re-entered password", () => {
         myDB.signup("testuser", "testuser@123.ca", "123", "1234", (msg) => {
             expect(msg).toBe("failed");
