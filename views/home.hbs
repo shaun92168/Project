@@ -5,6 +5,7 @@
 		<meta charset='utf-8'>
 		<title>Home</title>
 		<link href='home_style.css' rel='stylesheet' type='text/css'/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
 	<body>
@@ -22,20 +23,9 @@
 						<h3 style="text-align: center;"><b>Your Shopping Lists:</b></h3>
 						<div id='createList'>
 							<div id='lists'>
-								<input id='chooseList' placeholder='Enter a list' />
+								<input id='chooseList' placeholder='Enter a list' required />
 								<button id='addList'></button>
-								<button id='delList'></button>
-
-								<script>
-									var input = document.getElementById("chooseList");
-									input.addEventListener("keyup", function(event) {
-									  event.preventDefault();
-									  if (event.keyCode === 13) {
-									    document.getElementById("addList").click();
-									  }
-									});
-								</script>
-																
+								<button id='delList'></button>	
 							</div>
 							<script src='list_js.js'></script>
 						</div>
@@ -52,5 +42,6 @@
 				</div>
 			</div>
 		</div>
+		<script src='home_js.js'></script>
 	</body>
 </html>
