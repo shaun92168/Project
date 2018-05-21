@@ -1,7 +1,7 @@
 body {
-	font-family: 'Roboto', sans-serif;
-	background-color: white;
-	color: black;
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    color: black;
     margin: auto;
 }
 
@@ -90,30 +90,30 @@ ul.indent a:hover {
 
 
 div.outermain {
-	position: relative;
-	margin-top: 0px;
-	width: 70%;
-	margin-left: 15%;
-	margin-right: auto;
-	background-color: #EEEEEE;
-	min-height: 100vh;	
+    position: relative;
+    margin-top: 0px;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: auto;
+    background-color: #EEEEEE;
+    min-height: 100vh;  
 }
 
 div.innermain {
-	padding-top: 20px;
-	padding-bottom: 50px;
-	margin-left: 10%;
-	margin-right: 10%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    margin-left: 10%;
+    margin-right: 10%;
 
 }
 
 div.innermain a {
-	color: black;
-	text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 div.innermain a:hover {
-	text-decoration: underline; 
+    text-decoration: underline; 
 }
 
 button {
@@ -160,10 +160,10 @@ button:hover {
 }
 
 #addList {
-	background: url("add_extra_small.png") center center no-repeat;
-	background-color: #315EDC;
-	position: relative;
-	bottom: 4px;
+    background: url("add_extra_small.png") center center no-repeat;
+    background-color: #315EDC;
+    position: relative;
+    bottom: 4px;
 }
 
 #delList {
