@@ -41,6 +41,11 @@ div.innermain a:hover {
     padding: 0;
     overflow: hidden;
     background-color: #315EDC;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 2px 7px #888888;
 }
 
 .navBarLeft {
@@ -63,6 +68,10 @@ div.innermain a:hover {
 
 .navBarLink:hover {
     background-color: #2145AB;
+}
+
+#account {
+    background-color: #073364;
 }
 
 fieldset {

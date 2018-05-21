@@ -12,6 +12,7 @@ body {
     padding: 0;
     overflow: hidden;
     background-color: #315EDC;
+    box-shadow: 0 2px 7px #888888;
 }
 
 .navBarLeft {
