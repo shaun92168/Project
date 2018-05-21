@@ -21,19 +21,16 @@
 		</div>
 
 		<div id='categories'>
-			{{#each lists as |list|}}
-					<h2>{{list.name}}</h2>
-            <hr />
-                <button id='newCategory'>New Category</button>
-				{{#each list.categories as |categories|}}
-					<ul id='{{categories.name}}'><h4>{{categories.name}}</h4>
-					{{#each categories.items}}
-						<li id='{{this}}'>{{this}}</li>
+			<h2>{{list.name}}</h2>
+			<button id='newCategory'>New Category</button>
+			{{#each list.categories as |category|}}
+            	<hr />
+					<ul id='{{category.name}}'><h4>{{category.name}}</h4>
+					{{#each category.items as |item|}}
+						<li id='{{item}}'>{{item}}</li>
 					{{/each}}
 					</ul>
-				{{/each}}
 			{{/each}}
-
 		</div>
         
 		<script src='list_js.js'></script>

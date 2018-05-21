@@ -1,4 +1,7 @@
+/** Mongoclient module */
 const MongoClient = require('mongodb').MongoClient;
+
+/** mongodb database url */
 const url = 'mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project'
 
 /** Verifiys the that the inputted email and password are correct format and match the ones in the database.
@@ -143,9 +146,8 @@ function updateDB(email, data) {
 	connectDB((collection, db, client) => {
 		collection.replaceOne({email: email}, data);
 	  	client.close();
-	})
+	});
 }
-
 
 /** Adds a new user document to the database and returns a callback either 'error' or 'success'
  * @param {JSON} record The new users data to add to the database
@@ -193,7 +195,7 @@ function deleteUserDB(record, table, callback) {
  */
 function addListDB(email, list) {
 	readFile(email, (user) => {
-		user.lists.push({name: list});
+		user.lists.push(list);
 		updateDB(email, user);
 	});
 }
@@ -295,28 +297,10 @@ module.exports = {
 	updateDB,
 	addUserDB,
     deleteUserDB,
-    deleteCategoryDB,
-    addCategoryDB,
-    addItemDB,
     addListDB,
-    deleteItemDB,
-    deleteListDB
-
+    deleteListDB,
+    addCategoryDB,
+    deleteCategoryDB,
+    addItemDB,
+    deleteItemDB
 }
-
-
-	
-
-
-// henrys unittest example to me (nick)
-// var obj = {
-// 	id:expect.anything(),
-// 	name:expect.anything()
-// }
-
-// test("dbRead", (done)=>{
-// 	readFile({data:"stuff"}, (err, data)=>{
-// 		expect(data).toBe("failed");
-// 		expect(data).toEqual(obj);
-// 		done();
-// 	})

@@ -87,7 +87,6 @@ function delCategory() {
 	}
 }
 
-
 /**
  * This function add a new item in the current category
  * @name addItem
@@ -157,7 +156,6 @@ function delItem() {
 		}));
 	}
 }
-
 
 document.getElementById('newCategory').addEventListener('click', function() {
 	addCategory();

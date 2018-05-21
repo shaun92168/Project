@@ -5,9 +5,7 @@ body {
     margin: auto;
 }
 
-
 /*For the Navigation bar*/
-
 #navBar {
     list-style-type: none;
     margin: 0;
@@ -42,9 +40,7 @@ body {
     background-color: #073364;
 }
 
-
 /*For the category lists*/
-
 .item {
     list-style-type: none;
     font-family: verdana;
@@ -70,25 +66,20 @@ body {
 }
 
 /*For the Add lists*/
-
-ul.indent {
+/*ul.indent {
     list-style-type: none;
     position: relative;
     bottom: 150px;
     right: 60px;
     text-align: center;
 }
-
 ul.indent a {
     color: black;
     text-decoration: none;
 }
-
 ul.indent a:hover {
     text-decoration: underline;
-}
-
-
+}*/
 div.outermain {
     position: relative;
     margin-top: 0px;
@@ -106,7 +97,6 @@ div.innermain {
     margin-right: 10%;
 
 }
-
 div.innermain a {
     color: black;
     text-decoration: none;
@@ -130,6 +120,7 @@ button {
     opacity: 0.7;
     border-radius: 5px;
 }
+
 button:hover {
     opacity: 1.0;
     transition: 0.4s;

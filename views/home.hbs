@@ -32,16 +32,17 @@
 				</div>
 
 				<div>
-					<ul class = "indent">
+					<form id='radioForm' action="/listPage" method="post">
 					{{#each lists as |list|}}
-						<form action='/groceryListPage' method='get'>
-							<div><input class='item' type='submit' value='{{list.name}}' name='test'></div>
-						</form>
+						<input id="{{list.name}}" type="radio" name="radioList" value='{{list.name}}'>
+						<label for='{{list.name}}'>{{list.name}}<br>
 					{{/each}}
-					</ul>
+						<input type='submit' value='Edit list'>
+					</form>
 				</div>
 			</div>
 		</div>
 		<script src='home_js.js'></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	</body>
 </html>
