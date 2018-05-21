@@ -105,7 +105,7 @@ app.get('/', (request, response) => {
  * @param {JSON} response
  */
 app.get('/signup', (request, response) => {
-    response.render('Signup.hbs')
+    response.render('signup.hbs')
 });
 
 /**
