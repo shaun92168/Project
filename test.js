@@ -193,10 +193,18 @@ describe.skip("deleteCategoryDB function testing", () => {
 describe.skip("deleteItem function testing", ()=>{
     test("delete item from category", ()=>{
         myDB.deleteItemDB('brendon@1234', "grocery list", "Produce", "orange", (msg) =>{
-            expect(msg).toBe("Success");
+            expect(msg).toBe("success");
         });
     });
 });
+
+describe.skip("additem function testing",()=>{
+	test("add item to category",()=>{
+		myDB.addItemDB('nick@123.ca',"list1","Meat","Turkey",(msg)=>{
+			expect(msg).toBe("success");
+		})
+	})
+})
 
 describe("getItemIndex function testing", () => {
     test("get index of item in category", () => {

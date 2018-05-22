@@ -9,38 +9,34 @@
 	</head>
 
 	<body>
-		
 		{{> navbar}}
 
-		<div id='logo' class='text'>
-			<div class='logoText'>
-				<h1>Welcome {{username}}</h1>
-			</div>
+		<div class='text'>
+			<h1>Welcome {{username}}</h1>
 		</div>
-		<div class="outermain">
-			<div class="innermain">
+
+		<div id="outerMain">
+			<div id="innermain">
 				<div class='text'>
-						<h3 style="text-align: center;"><b>Your Shopping Lists:</b></h3>
-						<div id='createList'>
-							<div id='lists'>
-								<input id='chooseList' placeholder='Enter a list' required />
-								<button id='addList'></button>
-								<button id='delList'></button>	
-							</div>
-						</div>
+					<h3><b>Your Shopping Lists:</b></h3>
+					<button class='button' id='addList'>Create a new list</button>
 				</div>
 
 				<div>
-					<form id='radioForm' action="/listPage" method="post">
+					<form id='radioForm' action="/listPage" method="post" onsubmit="return valid();" >
 					{{#each lists as |list|}}
-						<input id="{{list.name}}" type="radio" name="radioList" value='{{list.name}}'>
-						<label for='{{list.name}}'>{{list.name}}<br>
+						<input type="radio" name="radioList" id="{{list.name}}" value="{{list.name}}"><label for='{{list.name}}'>{{list.name}}</label><br>
 					{{/each}}
-						<input type='submit' value='Edit list'>
+						<input type='submit' class='button' id='sendButton' value='Open List'>
 					</form>
+				</div>
+				<div id='editButtons'>
+					<button class='button' id='renameList'>Rename List</button>
+					<button class='button' id='delList'>Delete List</button>
 				</div>
 			</div>
 		</div>
+
 		<script src='home_js.js'></script>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	</body>
