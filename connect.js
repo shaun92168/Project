@@ -302,6 +302,19 @@ function deleteItemDB(email, list, category, item, callback) {
 	});
 }
 
+/*
+function renameListDB(newname, email){
+  connectDB((collection, db, client) => {
+      //readFile(email);
+	
+		collection.update({email: email},{$set:{name:newname}});
+		//updateDB(email, user);
+
+		callback('success');
+	});
+}
+*/
+    
 module.exports = {
 	login,
 	signup,
@@ -318,5 +331,25 @@ module.exports = {
     addCategoryDB,
     deleteCategoryDB,
     addItemDB,
-    deleteItemDB
+    addListDB,
+    deleteItemDB,
+    deleteListDB
+
 }
+
+
+	
+
+
+// henrys unittest example to me (nick)
+// var obj = {
+// 	id:expect.anything(),
+// 	name:expect.anything()
+// }
+
+// test("dbRead", (done)=>{
+// 	readFile({data:"stuff"}, (err, data)=>{
+// 		expect(data).toBe("failed");
+// 		expect(data).toEqual(obj);
+// 		done();
+// 	})

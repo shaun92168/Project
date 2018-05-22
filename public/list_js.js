@@ -172,3 +172,12 @@ document.getElementById('delCategory').addEventListener('click', function() {
 document.getElementById('delItem').addEventListener('click', function() {
 	delItem();
 });
+
+/*
+document.getElementById("categories").addEventListener("click", function(){
+    document.getElementById("categories").addEventListener("keyup", function(){
+        document.getElementById("categories").innerHTML = document.getElementById("categories").value;
+
+    });
+});
+*/
