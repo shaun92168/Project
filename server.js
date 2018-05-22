@@ -78,7 +78,7 @@ app.post('/login', function(req, res) {
 app.post('/signup', function (req, res) {
     getDB.signup(req.body.username, req.body.email, req.body.password, req.body.repassword, (msg) => {
         if (msg === 'failed') {
-            res.render('signup.hbs')
+            //res.render('signup.hbs')
         } else {
             req.session.msg = msg
             res.redirect('/homePage')
