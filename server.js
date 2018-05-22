@@ -41,8 +41,8 @@ app.use(bodyParser.json())
 app.use(session({
     cookieName: 'session',
     secret: 'our_secret_stuff',
-    duration: 5 * 60 * 1000,
-    activeDuration: 2 * 60 * 1000
+    duration: 1 * 60 * 60 * 1000,
+    activeDuration: 1 * 30 * 60 * 1000
 }));
 
 /**
@@ -78,7 +78,7 @@ app.post('/login', function(req, res) {
 app.post('/signup', function (req, res) {
     getDB.signup(req.body.username, req.body.email, req.body.password, req.body.repassword, (msg) => {
         if (msg === 'failed') {
-            //res.render('signup.hbs')
+            // res.render('signup.hbs')
         } else {
             req.session.msg = msg
             res.redirect('/homePage')
@@ -108,10 +108,6 @@ app.get('/signup', (request, response) => {
     response.render('signup.hbs')
 });
 
-app.get('/maps',(request,response)=>{
-	response.render('maps.hbs')
-});
-
 /**
  * This takes the username and go to the home page at home.hbs
  * @name homePage
@@ -131,6 +127,24 @@ app.get('/homePage', function(req, res) {
     } else {
         res.redirect('/');
     }
+});
+
+/**
+ * sends a lists old name and the new name to the DB to change it. if it returns true then the function sends a response to the webpage.
+ * @name addList
+ * @function
+ * @param {JSON} request
+ * @param {JSON} response
+ */
+app.post('/renameList', (req, res) => {
+    var email = req.session.user.email
+    var newList = req.body.newList
+    var oldList = req.body.oldList
+    getDB.renameDB(email, newList, oldList, (msg) => {
+        if (msg === 'success') {
+            res.send('ok')
+        }
+    });
 });
 
 /**
@@ -221,6 +235,8 @@ app.post('/addItem', (req, res) => {
     getDB.addItemDB(email, list, category, item, (msg) => {
         if (msg === 'success') {
             res.send('ok');
+        } else {
+            res.send('not ok')
         }
     });
 });
@@ -281,6 +297,8 @@ app.get('/account', (request, response) => {
 });
 
 /**
+<<<<<<< HEAD
+=======
  * renders the about page
  * @name /about
  * @function
@@ -292,6 +310,7 @@ app.get('/about', (request, response) => {
 });
 
 /**
+>>>>>>> upstream/master
  * deletes session data and redirects to login page
  * @name /logout
  * @function

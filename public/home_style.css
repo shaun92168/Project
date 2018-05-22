@@ -4,8 +4,8 @@ body {
     color: black;
     margin: auto;
 }
+/* Start of the Navigation bar*/
 
-/*For the Navigation bar*/
 #navBar {
     list-style-type: none;
     margin: 0;
@@ -40,48 +40,15 @@ body {
 #home {
     background-color: #073364;
 }
-
-/*For the category lists*/
-.item {
-    list-style-type: none;
-    font-family: verdana;
-    text-decoration: none;
-    color: black;
-    float: left;
-    position: absolute;
-    top: 160px;
-}
-
-#logo {
-    border-bottom: 1px solid #5D6877;
-    width: 70%;
-    margin: auto;
-}
-
-.logoText {
-    text-align: center;
-}
+/* End of the Navigation bar */
 
 .text {
+    text-align: center;
     font-family: verdana;
 }
 
-/*For the Add lists*/
-/*ul.indent {
-    list-style-type: none;
-    position: relative;
-    bottom: 150px;
-    right: 60px;
-    text-align: center;
-}
-ul.indent a {
-    color: black;
-    text-decoration: none;
-}
-ul.indent a:hover {
-    text-decoration: underline;
-}*/
-div.outermain {
+#outerMain {
+    border-top: 1px solid #5D6877;
     position: relative;
     margin-top: 0px;
     width: 70%;
@@ -91,23 +58,15 @@ div.outermain {
     min-height: 100vh;  
 }
 
-div.innermain {
+#innermain {
     padding-top: 20px;
     padding-bottom: 50px;
     margin-left: 10%;
     margin-right: 10%;
 
 }
-div.innermain a {
-    color: black;
-    text-decoration: none;
-}
 
-div.innermain a:hover {
-    text-decoration: underline; 
-}
-
-button {
+.button {
     background-color: #315EDC;
     border: 0.5px solid #002280;
     color: white;
@@ -122,45 +81,18 @@ button {
     border-radius: 5px;
 }
 
-button:hover {
+.button:hover {
     opacity: 1.0;
     transition: 0.4s;
 }
 
-#createList {
-    text-align: center;
-}
-
-#chooseList {
-    border: none;
-    border-color: blue;
-    border-radius: 2px;
-    margin: 15px 0px 0px 15px;
-    padding: 10px 15px;
-    font-size: 15px;
-    width: 220px;
-}
-
-#chooseList:hover {
-    transition-duration: 0.2s;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
-}
-
-#chooseList:focus {
-    transition-duration: 0.2s;
-    outline-width: 0;
-}
-
-#addList {
-    background: url("add_extra_small.png") center center no-repeat;
-    background-color: #315EDC;
-    position: relative;
-    bottom: 4px;
+#renameList {
+    position: absolute;
+    bottom: 0%;
 }
 
 #delList {
-    background: url("delete_extra_small.png") center center no-repeat;
-    background-color: #315EDC;
-    position: relative;
-    bottom: 4px;
+    position: absolute;
+    right: 0%;
+    bottom: 0%;
 }
