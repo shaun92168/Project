@@ -81,7 +81,7 @@ app.post('/signup', function (req, res) {
             // res.render('signup.hbs')
         } else {
             req.session.msg = msg
-            res.redirect('/homePage')
+            res.redirect('/')
         }
     });
 });
