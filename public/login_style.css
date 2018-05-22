@@ -79,3 +79,16 @@ body {
 	top: 56.5%;
 	color: red;
 }
+
+input[type=submit] {
+	border-radius:5px;
+    cursor:pointer;
+    border: 0.5px solid;
+    height:25px;
+    font-family:verdana; 
+}
+
+input[type=submit]:hover {
+	background-color:white;
+    transition:0.3s;
+}
