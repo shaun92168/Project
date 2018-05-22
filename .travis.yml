@@ -4,3 +4,4 @@ node_js:
 
  deploy:
   provider: heroku
+  strategy: git
