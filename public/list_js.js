@@ -30,7 +30,9 @@
 
 
 /**
- * This function add a new Category to the current list
+ * This function add a new category to the current list
+ * @name addCategory
+ * @function
  */
 function addCategory() {
 	var newCategory = prompt('Enter a new category name:');
@@ -59,7 +61,9 @@ function addCategory() {
 }
 
 /**
- * This function delete a specific Category
+ * This function delete a specific category from the current list
+ * @name delCategory
+ * @function
  */
 function delCategory() {
 	var categoryName = document.getElementById('chooseCategory').value
@@ -83,9 +87,10 @@ function delCategory() {
 	}
 }
 
-
 /**
- * This function add a new Item in a specific Category
+ * This function add a new item in the current category
+ * @name addItem
+ * @function
  */
 function addItem() {
 	var categoryName = document.getElementById('chooseCategory').value
@@ -124,7 +129,9 @@ function addItem() {
 }
  
 /**
- * This function delete a specific Category
+ * This function delete an item from the current category 
+ * @name delItem
+ * @function
  */
 function delItem() {
 	var categoryName = document.getElementById('chooseCategory').value
@@ -149,7 +156,6 @@ function delItem() {
 		}));
 	}
 }
-
 
 document.getElementById('newCategory').addEventListener('click', function() {
 	addCategory();

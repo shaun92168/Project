@@ -1,19 +1,18 @@
 body {
-	font-family: 'Roboto', sans-serif;
-	background-color: white;
-	color: black;
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    color: black;
     margin: auto;
 }
 
-
 /*For the Navigation bar*/
-
 #navBar {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #315EDC;
+    box-shadow: 0 2px 7px #888888;
 }
 
 .navBarLeft {
@@ -42,9 +41,7 @@ body {
     background-color: #073364;
 }
 
-
 /*For the category lists*/
-
 .item {
     list-style-type: none;
     font-family: verdana;
@@ -70,50 +67,44 @@ body {
 }
 
 /*For the Add lists*/
-
-ul.indent {
+/*ul.indent {
     list-style-type: none;
     position: relative;
     bottom: 150px;
     right: 60px;
     text-align: center;
 }
-
 ul.indent a {
     color: black;
     text-decoration: none;
 }
-
 ul.indent a:hover {
     text-decoration: underline;
-}
-
-
+}*/
 div.outermain {
-	position: relative;
-	margin-top: 0px;
-	width: 70%;
-	margin-left: 15%;
-	margin-right: auto;
-	background-color: #EEEEEE;
-	min-height: 100vh;	
+    position: relative;
+    margin-top: 0px;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: auto;
+    background-color: #EEEEEE;
+    min-height: 100vh;  
 }
 
 div.innermain {
-	padding-top: 20px;
-	padding-bottom: 50px;
-	margin-left: 10%;
-	margin-right: 10%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    margin-left: 10%;
+    margin-right: 10%;
 
 }
-
 div.innermain a {
-	color: black;
-	text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 div.innermain a:hover {
-	text-decoration: underline; 
+    text-decoration: underline; 
 }
 
 button {
@@ -130,6 +121,7 @@ button {
     opacity: 0.7;
     border-radius: 5px;
 }
+
 button:hover {
     opacity: 1.0;
     transition: 0.4s;
@@ -160,10 +152,10 @@ button:hover {
 }
 
 #addList {
-	background: url("add_extra_small.png") center center no-repeat;
-	background-color: #315EDC;
-	position: relative;
-	bottom: 4px;
+    background: url("add_extra_small.png") center center no-repeat;
+    background-color: #315EDC;
+    position: relative;
+    bottom: 4px;
 }
 
 #delList {
