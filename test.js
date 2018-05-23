@@ -167,9 +167,9 @@ var shaunObj = {
 };
 
 describe.skip("updateDB testing", ()=>{
-	test("update brendon@1234 to shaun@1234", ()=>{
-		myDB.updateDb(email, shaunObj)
-	}); 
+    test("update brendon@1234 to shaun@1234", ()=>{
+        myDB.updateDb(email, shaunObj)
+    }); 
 });
 
 /*
