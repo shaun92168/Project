@@ -5,10 +5,16 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
+    body {
+        background-image: url("shopcart4.jpg");
+        
+    }
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
+        float: center;
+            height:50%;
+        
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -76,6 +82,7 @@
       #resultsTable {
         border-collapse: collapse;
         width: 240px;
+        
       }
       #rating {
         font-size: 13px;
@@ -87,6 +94,7 @@
       .iw_attribute_name {
         font-weight: bold;
         text-align: right;
+        align:left;
       }
       .iw_table_icon {
         text-align: right;
@@ -108,7 +116,7 @@
       <select id="country">
         <option value="ca">Canada</option>
         <option value="us" selected>U.S.A.</option>
-        <option value="uk">United Kingdom</option>
+        
       </select>
     </div>
 
@@ -172,10 +180,6 @@
         'us': {
           center: {lat: 37.1, lng: -95.7},
           zoom: 3
-        },
-        'uk': {
-          center: {lat: 54.8, lng: -4.6},
-          zoom: 5
         }
       };
 
