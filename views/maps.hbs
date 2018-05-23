@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+
 <html>
   <head>
     <title>Place Autocomplete Store Search</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link href='map_style.css' rel='stylesheet' type='text/css'/>
     <meta charset="utf-8">
     <style>
     body {
@@ -14,6 +15,8 @@
       #map {
         float: center;
             height:50%;
+            border-style: solid;
+    border-width: 5px;
         
       }
       /* Optional: Makes the sample page fill the window. */
@@ -29,6 +32,7 @@
         width: 440px;
       }
       #listing {
+        
         position: absolute;
         width: 200px;
         height: 470px;
@@ -55,6 +59,7 @@
         top: 0px;
         z-index: 5;
         background-color: #fff;
+        margin-top: 92px;
       }
       #controls {
         position: absolute;
@@ -63,6 +68,7 @@
         top: 0px;
         z-index: 5;
         background-color: #fff;
+        margin-top: 92px;
       }
       #autocomplete {
         width: 100%;
@@ -103,11 +109,13 @@
   </head>
 
   <body>
-
+    {{> navbar}}
+    <br>
+    <br>
     <div id="findhotels">
       Find Stores in:
     </div>
-
+    
     <div id="locationField">
       <input id="autocomplete" placeholder="Enter a city" type="text" />
     </div>
@@ -120,6 +128,10 @@
       </select>
     </div>
 
+    <br>
+    <br>
+    <br>
+    <br>
     <div id="map"></div>
 
     <div id="listing">
@@ -156,14 +168,7 @@
     </div>
 
     <script>
-      // This example uses the autocomplete feature of the Google Places API.
-      // It allows the user to find all hotels in a given place, within a given
-      // country. It then displays markers for all the hotels returned,
-      // with on-click details for each hotel.
-
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+   
 
       var map, places, infoWindow;
       var markers = [];
@@ -174,7 +179,7 @@
 
       var countries = {
         'ca': {
-          center: {lat: 62, lng: -110.0},
+          center: {lat: 53.7267, lng: -123.0},
           zoom: 3
         },
         'us': {
@@ -231,7 +236,8 @@
       function search() {
         var search = {
           bounds: map.getBounds(),
-          types: ['supermarket']
+          types: ['department_store','supermarket']
+          
         };
 
         places.nearbySearch(search, function(results, status) {

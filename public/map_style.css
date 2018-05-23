@@ -1,0 +1,30 @@
+#navBar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #315EDC;
+    box-shadow: 0 2px 7px #888888;
+}
+
+.navBarLeft {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    float: left;
+}
+
+.navBarRight {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    float: right;
+}
+
+.navBarLink:hover {
+    background-color: #2145AB;
+}
