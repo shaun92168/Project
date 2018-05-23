@@ -43,7 +43,7 @@ body {
 }
 /* End of the Navigation bar */
 
-.text {
+.text{
     text-align: center;
     font-family: verdana;
 }
@@ -89,13 +89,21 @@ body {
 
 #renameList {
     position: absolute;
-    top:30%;
-    left:80%;
+    top:2%;
+    left:19%;
+
 }
 
 #delList {
     position:absolute;
-    top:20%;
-    left:80%;
+    top:2%;
+    left:88%;
     background-color:red;
 }
+
+#addList {
+    position:absolute;
+    top:2%;
+    left:3%;
+}
+    
