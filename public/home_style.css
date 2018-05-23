@@ -68,7 +68,7 @@ body {
 }
 
 .button {
-    background-color: black/*#315EDC*/;
+    background-color: #315EDC;
     border: 0.5px solid #002280;
     color: white;
     padding: 15px 15px;
