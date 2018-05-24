@@ -1,7 +1,9 @@
+
 body {
     font-family: 'Roboto', sans-serif;
 }
 
+>>>>>>> upstream/master
 #navBar {
     list-style-type: none;
     margin: 0;
@@ -33,6 +35,8 @@ body {
     background-color: #2145AB;
 }
 
+
 #maps {
     background-color: #073364;
 }
+
