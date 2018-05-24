@@ -66,7 +66,6 @@ app.post('/login', function(req, res) {
     });
 });
 
-
 /**
  * sends the signup data to the DB for validation, if true it redirects to the homepage, 
  * else it renders the signup page again

@@ -19,6 +19,7 @@ function addList() {
                 newListRadio.setAttribute('type', 'radio');
                 newListRadio.setAttribute('name', 'radioList');
                 newListRadio.setAttribute('id', listName)
+                newListRadio.setAttribute('value', listName)
 
                 var newLabel = document.createElement('label');
                 var newId = document.createTextNode(listName);
