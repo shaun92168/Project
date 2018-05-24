@@ -96,6 +96,7 @@ function renameList() {
                     lists.value = newName
                     list = lists.nextSibling
                     list.innerText = newName
+                    list.setAttribute('for', newName)
                 } else {
                     swal('Error: change not saved, please try again.');
                 }
