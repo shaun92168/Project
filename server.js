@@ -297,8 +297,6 @@ app.get('/account', (request, response) => {
 });
 
 /**
-<<<<<<< HEAD
-=======
  * renders the about page
  * @name /about
  * @function
@@ -310,7 +308,6 @@ app.get('/about', (request, response) => {
 });
 
 /**
->>>>>>> upstream/master
  * deletes session data and redirects to login page
  * @name /logout
  * @function
