@@ -37,33 +37,37 @@
 function addCategory() {
 	var newCategory = prompt('Enter a new category name:');
 	if (newCategory != null) {
-		var xhr = new XMLHttpRequest();
-		xhr.open('POST', '/addCategory');
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.onload = function() {
-		    if (xhr.status === 200) {
-				var newList = document.createElement('UL');
-				var hr = document.createElement('HR')
-				var listStyle = document.createElement('H3');
-				var categoryName = document.createTextNode(newCategory);
+		if (newCategory.length < 5) {
+			swal('Category name have atleast 5 characters')
+		} else {
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '/addCategory');
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onload = function() {
+			    if (xhr.status === 200) {
+					var newList = document.createElement('UL');
+					var hr = document.createElement('HR')
+					var listStyle = document.createElement('H3');
+					var categoryName = document.createTextNode(newCategory);
 
-				var dropDown = document.getElementById('chooseCategory')
-				var newOption = document.createElement('OPTION')
-				newOption.innerText = newCategory
-				dropDown.appendChild(newOption)
+					var dropDown = document.getElementById('chooseCategory')
+					var newOption = document.createElement('OPTION')
+					newOption.innerText = newCategory
+					dropDown.appendChild(newOption)
 
-				newList.appendChild(hr)
-				newList.appendChild(listStyle);
-				listStyle.appendChild(categoryName);
-				newList.id = newCategory;
-				document.getElementById('categories').appendChild(newList);
-			} else {
-			    swal('Error: change not saved, please try again.');
-			}
-		};
-    	xhr.send(JSON.stringify({
-		    category: newCategory
-		}));
+					newList.appendChild(hr)
+					newList.appendChild(listStyle);
+					listStyle.appendChild(categoryName);
+					newList.id = newCategory;
+					document.getElementById('categories').appendChild(newList);
+				} else {
+				    swal('Error: change not saved, please try again.');
+				}
+			};
+	    	xhr.send(JSON.stringify({
+			    category: newCategory
+			}));
+		}
 	}
 }
 

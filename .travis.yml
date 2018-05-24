@@ -6,4 +6,6 @@ deploy:
   api_key:
     secure: CA0tQZJWS8a4SFaUme5xG/E44IiE7VBYqB+z0zE1NSVPNkN/fr9m1Tz9E/SyY7DhLfMAnifSGCLSlsrOQXgOYS3WO1YuSSDq8goSAp0BUw5betjwBurLEbeTMZNJ8jQFgNs1J9L77UsQDgX3bSU/NGAxZDwfptNEinVrg8cdPvET+xaPCfjrK/5kHXRoLgDHdXcL5Y5Vlr6BQvIv/p4Q1NJWNoXLyny5M18vxcgHgFe9bnAc1qG1tgLgpfXIBSRbSFwM9INjKeqTxQQss0gM36dBDnWoAMEz3aHS4p+biUi37AQAKBhRMOB6Al43Xth9stYhPMXuROuP6gor4uk5cWWLxKJDlt2M1IjDsjdSdkIPbhNSwR9112CQ8LXAYyI4nzudzbSRL9JFNqJ3v50iQyttMLk8aWUY0GBac8+FPSu7b+qKezBxHS7qdhxgXh383RkgUAt1vbgPZfrtHR5QOZ1SryXIm8jp06tYN/zXvggmfZu66R3biQBSubkUkTn2yuc6Uk2O0EJ2e672OqE5z5obqNIqGAyKwvAbYleOR7u2x3ZgygkELt0lZcz998uBGgEdoVewj2o1TsP0wfyUW1YCHXhSqYF7Bcss6qAUD6TsOvVYvq1lnn+E3hVdjHoP1bpipMGRMSbdb8nvSXf6WCpqVc5x+ojcTo2aeGyCCnQ=
 env:
-  - DB_API='mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project'
+  global:
+    - DB_API="mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project"
+    - DB="grocery_list_project"
