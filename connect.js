@@ -1,8 +1,10 @@
+require('dotenv').config()
+
 /** Mongoclient module */
 const MongoClient = require('mongodb').MongoClient;
 
 /** mongodb database url */
-const url = 'mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project'
+const url = process.env.DB_API
 
 /** Verifiys the that the inputted email and password are correct format and match the ones in the database.
  * @param {string} email The users email address

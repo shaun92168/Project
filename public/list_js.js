@@ -43,9 +43,16 @@ function addCategory() {
 		xhr.onload = function() {
 		    if (xhr.status === 200) {
 				var newList = document.createElement('UL');
+				var hr = document.createElement('HR')
 				var listStyle = document.createElement('H3');
 				var categoryName = document.createTextNode(newCategory);
 
+				var dropDown = document.getElementById('chooseCategory')
+				var newOption = document.createElement('OPTION')
+				newOption.innerText = newCategory
+				dropDown.appendChild(newOption)
+
+				newList.appendChild(hr)
 				newList.appendChild(listStyle);
 				listStyle.appendChild(categoryName);
 				newList.id = newCategory;
@@ -68,22 +75,28 @@ function addCategory() {
 function delCategory() {
 	var categoryName = document.getElementById('chooseCategory').value
 	var myCategory = document.getElementById(categoryName)
-	if (myCategory === null) {
-		swal('Category does not exist!')
-	} else { 
-		var xhr = new XMLHttpRequest();
-		xhr.open('POST', '/deleteCategory');
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.onload = function() {
-		    if (xhr.status === 200) {
-				myCategory.parentNode.removeChild(myCategory);
-			} else {
-			    swal('Error: change not saved, please try again.');
-			}
-		};
-    	xhr.send(JSON.stringify({
-		    category: categoryName
-		}));
+	if (categoryName === 'Select a category') {
+		swal('Please choose a category to delete')
+	} else if (confirm('Are you sure you want to delete the category ' + categoryName)) {
+		if (myCategory === null) {
+			swal('Category does not exist!')
+		} else { 
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '/deleteCategory');
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onload = function() {
+			    if (xhr.status === 200) {
+			    	var dropDownOption =  document.getElementById('chooseCategory')
+			    	dropDownOption.remove(dropDownOption.selectedIndex)
+					myCategory.parentNode.removeChild(myCategory);
+				} else {
+				    swal('Error: change not saved, please try again.');
+				}
+			};
+	    	xhr.send(JSON.stringify({
+			    category: categoryName
+			}));
+		}
 	}
 }
 
@@ -94,36 +107,48 @@ function delCategory() {
  */
 function addItem() {
 	var categoryName = document.getElementById('chooseCategory').value
-	var itemName = document.getElementById('chooseItem').value
 	var myCategory = document.getElementById(categoryName)
-	var myName = document.getElementById(itemName)	
-	if (myCategory === null) {
-		swal('Category does not exist!')
+	if (categoryName === 'Select a category') {
+		swal('Please choose a category to add an item to')
 	} else {
-		// problem: can be number
-		if (myName === null && itemName.length > 0) {
-			var xhr = new XMLHttpRequest();
-			xhr.open('POST', '/addItem');
-			xhr.setRequestHeader('Content-Type', 'application/json');
-			xhr.onload = function() {
-			    if (xhr.status === 200) {
-				    var newElem = document.createElement('LI');
-					var newId = document.createTextNode(itemName)
-
-					newElem.id = itemName
-					document.getElementById(categoryName).appendChild(newElem)
-
-					newElem.appendChild(newId)
-			    } else {
-			        alert('Error, not saved on the server');
-			    }
-			};
-	    	xhr.send(JSON.stringify({
-			    item: itemName,
-			    category: categoryName
-			}));
+		var newItem = prompt('Enter an item name')
+		if (myCategory === null) {
+			swal('Category does not exist!')
 		} else {
-			swal('Cant add item!')
+			if (newItem === null) {
+			} else if (newItem.length < 3) {
+				swal('Item name must be 3 characters long')
+			} else {
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', '/addItem');
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.onload = function() {
+				    if (xhr.status === 200) {
+					    var newElem = document.createElement('LI');
+						var newId = document.createTextNode(newItem)
+
+						var newBut = document.createElement('BUTTON')
+						newBut.innerText = 'x'
+						newBut.onclick = function(){
+							delItem(categoryName, newItem);
+						}
+						newBut.classList.add('deleteItem');
+
+						newElem.id = newItem
+						newElem.classList.add('item')
+						document.getElementById(categoryName).appendChild(newElem)
+
+						newElem.appendChild(newId)
+						newElem.appendChild(newBut)
+				    } else {
+				        alert('Error, not saved on the server');
+				    }
+				};
+		    	xhr.send(JSON.stringify({
+				    item: newItem,
+				    category: categoryName
+				}));
+			}
 		}
 	}
 }
@@ -133,10 +158,8 @@ function addItem() {
  * @name delItem
  * @function
  */
-function delItem() {
-	var categoryName = document.getElementById('chooseCategory').value
-	var itemName = document.getElementById('chooseItem').value
-	var myItem = document.getElementById(itemName)
+function delItem(category, item) {
+	var myItem = document.getElementById(item)
 	if (myItem === null) {
 		swal('Item does not exist!')
 	} else { 
@@ -151,8 +174,8 @@ function delItem() {
 		    }
 		}
     	xhr.send(JSON.stringify({
-		    item: itemName,
-		    category: categoryName
+		    item: item,
+		    category: category
 		}));
 	}
 }
@@ -167,10 +190,6 @@ document.getElementById('newItem').addEventListener('click', function() {
 
 document.getElementById('delCategory').addEventListener('click', function() {
 	delCategory();
-});
-
-document.getElementById('delItem').addEventListener('click', function() {
-	delItem();
 });
 
 /*

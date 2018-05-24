@@ -12,24 +12,25 @@
 		{{> navbar}}
 
 		<div id="menu">
-            
-            <input id='chooseCategory' placeholder='Enter a category'/>
-            <button id='delCategory'>Delete Category</button>
-			<input id='chooseItem' placeholder='Enter an item' />
+            <select id='chooseCategory' placeholder='Enter a category'>
+            	<option>Select a category</option>
+            	{{#each list.categories as |category|}}
+            	<option>{{category.name}}</option>
+            	{{/each}}
+            </select>
             <button id='newItem'>New Item</button>
-			<button id='delItem'>Delete Item</button>
+            <button id='delCategory'>Delete Category</button>
 		</div>
 
 		<div id='categories'>
 			<h2>{{list.name}}</h2>
 			<button id='newCategory'>New Category</button>
 			{{#each list.categories as |category|}}
-            	<hr />
-					<ul id='{{category.name}}'><h4>{{category.name}}</h4>
-					{{#each category.items as |item|}}
-						<li id='{{item}}'>{{item}}</li>
-					{{/each}}
-					</ul>
+				<ul id='{{category.name}}'><hr /><h4>{{category.name}}</h4>
+				{{#each category.items as |item|}}
+					<li class='item' id='{{item}}'>{{item}}<button class='deleteItem' onclick="delItem('{{category.name}}', '{{item}}')">x</button></li>
+				{{/each}}
+				</ul>
 			{{/each}}
 		</div>
         

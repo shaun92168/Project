@@ -91,6 +91,8 @@ function renameList() {
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     lists = document.getElementById(listName)
+                    lists.id = newName
+                    lists.value = newName
                     list = lists.nextSibling
                     list.innerText = newName
                 } else {
