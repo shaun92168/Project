@@ -19,6 +19,7 @@ function addList() {
                 newListRadio.setAttribute('type', 'radio');
                 newListRadio.setAttribute('name', 'radioList');
                 newListRadio.setAttribute('id', listName)
+                newListRadio.setAttribute('value', listName)
 
                 var newLabel = document.createElement('label');
                 var newId = document.createTextNode(listName);
@@ -91,8 +92,11 @@ function renameList() {
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     lists = document.getElementById(listName)
+                    lists.id = newName
+                    lists.value = newName
                     list = lists.nextSibling
                     list.innerText = newName
+                    list.setAttribute('for', newName)
                 } else {
                     swal('Error: change not saved, please try again.');
                 }

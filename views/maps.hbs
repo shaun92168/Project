@@ -1,16 +1,26 @@
-<!DOCTYPE html>
+
 <html>
   <head>
     <title>Place Autocomplete Store Search</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link href='map_style.css' rel='stylesheet' type='text/css'/>
+    
     <meta charset="utf-8">
     <style>
+    body {
+        
+        
+    }
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
+        float: center;
+            height:50%;
+            border-style: solid;
+    		border-width: 5px;
+    		margin-left: 310px;        
       }
-      /* Optional: Makes the sample page fill the window. */
+     
       html, body {
         height: 100%;
         margin: 0;
@@ -21,24 +31,28 @@
       }
       #map {
         width: 440px;
+        margin:auto;
       }
       #listing {
+        
         position: absolute;
         width: 200px;
         height: 470px;
         overflow: auto;
+        margin-right: 500px;
         left: 442px;
         top: 0px;
         cursor: pointer;
         overflow-x: hidden;
       }
-      #findhotels {
+      #findstores {
         position: absolute;
         text-align: right;
         width: 100px;
         font-size: 14px;
         padding: 4px;
         z-index: 5;
+        margin-top: 80px;
         background-color: #fff;
       }
       #locationField {
@@ -49,7 +63,20 @@
         top: 0px;
         z-index: 5;
         background-color: #fff;
+        margin-top: 92px;
+        margin-left: 310px;
       }
+
+      #greyscale {
+      	position: relative;
+		margin-top: 0px;
+		width: 70%;
+		margin-left: 15%;
+		margin-right: auto;
+		background-color: #daebe8;
+		min-height: 100vh;
+      }
+
       #controls {
         position: absolute;
         left: 300px;
@@ -57,6 +84,8 @@
         top: 0px;
         z-index: 5;
         background-color: #fff;
+        margin-top: 92px;
+        margin-left: 350px;
       }
       #autocomplete {
         width: 100%;
@@ -76,6 +105,7 @@
       #resultsTable {
         border-collapse: collapse;
         width: 240px;
+        
       }
       #rating {
         font-size: 13px;
@@ -87,6 +117,7 @@
       .iw_attribute_name {
         font-weight: bold;
         text-align: right;
+        align:left;
       }
       .iw_table_icon {
         text-align: right;
@@ -95,11 +126,9 @@
   </head>
 
   <body>
-
-    <div id="findhotels">
-      Find Stores in:
-    </div>
-
+    {{> navbar}}
+    <br>
+    <br>
     <div id="locationField">
       <input id="autocomplete" placeholder="Enter a city" type="text" />
     </div>
@@ -108,9 +137,22 @@
       <select id="country">
         <option value="ca">Canada</option>
         <option value="us" selected>U.S.A.</option>
-        <option value="uk">United Kingdom</option>
+        
       </select>
     </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id = "greyscale">
+    	<br>
+    	<img src = "newlogo.png" style="display: block; margin-right: auto; margin-left: auto;" />
+    	<br>
+    	<p style="text-align:center;"> Find all the items from your lists at nearby Department Stores using our store finder. 
+    		Search all over Canada and the US!
+    	</p>
+    	<br>
 
     <div id="map"></div>
 
@@ -135,10 +177,10 @@
             <td class="iw_attribute_name">Telephone:</td>
             <td id="iw-phone"></td>
           </tr>
-          <tr id="iw-rating-row" class="iw_table_row">
+          <!-- <tr id="iw-rating-row" class="iw_table_row">
             <td class="iw_attribute_name">Rating:</td>
             <td id="iw-rating"></td>
-          </tr>
+          </tr> -->
           <tr id="iw-website-row" class="iw_table_row">
             <td class="iw_attribute_name">Website:</td>
             <td id="iw-website"></td>
@@ -146,16 +188,9 @@
         </table>
       </div>
     </div>
-
+</div>
     <script>
-      // This example uses the autocomplete feature of the Google Places API.
-      // It allows the user to find all hotels in a given place, within a given
-      // country. It then displays markers for all the hotels returned,
-      // with on-click details for each hotel.
-
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+   
 
       var map, places, infoWindow;
       var markers = [];
@@ -166,16 +201,12 @@
 
       var countries = {
         'ca': {
-          center: {lat: 62, lng: -110.0},
+          center: {lat: 53.7267, lng: -123.0},
           zoom: 3
         },
         'us': {
           center: {lat: 37.1, lng: -95.7},
           zoom: 3
-        },
-        'uk': {
-          center: {lat: 54.8, lng: -4.6},
-          zoom: 5
         }
       };
 
@@ -192,9 +223,6 @@
         infoWindow = new google.maps.InfoWindow({
           content: document.getElementById('info-content')
         });
-
-        // Create the autocomplete object and associate it with the UI input control.
-        // Restrict the search to the default country, and to place type "cities".
         autocomplete = new google.maps.places.Autocomplete(
             /** @type {!HTMLInputElement} */ (
                 document.getElementById('autocomplete')), {
@@ -223,11 +251,11 @@
         }
       }
 
-      // Search for hotels in the selected city, within the viewport of the map.
       function search() {
         var search = {
           bounds: map.getBounds(),
-          types: ['supermarket']
+          types: ['department_store']
+          
         };
 
         places.nearbySearch(search, function(results, status) {
@@ -245,7 +273,7 @@
                 animation: google.maps.Animation.DROP,
                 icon: markerIcon
               });
-              // If the user clicks a hotel marker, show the details of that hotel
+              // If the user clicks a  marker, show the details of that hotel
               // in an info window.
               markers[i].placeResult = results[i];
               google.maps.event.addListener(markers[i], 'click', showInfoWindow);
@@ -271,8 +299,8 @@
         var country = document.getElementById('country').value;
         if (country == 'all') {
           autocomplete.setComponentRestrictions({'country': []});
-          map.setCenter({lat: 15, lng: 0});
-          map.setZoom(2);
+          map.setCenter({lat: 15, lng: 56});
+          map.setZoom(4);
         } else {
           autocomplete.setComponentRestrictions({'country': country});
           map.setCenter(countries[country].center);
@@ -289,28 +317,7 @@
       }
 
       function addResult(result, i) {
-        var results = document.getElementById('results');
-        var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
-        var markerIcon = MARKER_PATH + markerLetter + '.png';
-
-        var tr = document.createElement('tr');
-        tr.style.backgroundColor = (i % 2 === 0 ? '#F0F0F0' : '#FFFFFF');
-        tr.onclick = function() {
-          google.maps.event.trigger(markers[i], 'click');
-        };
-
-        var iconTd = document.createElement('td');
-        var nameTd = document.createElement('td');
-        var icon = document.createElement('img');
-        icon.src = markerIcon;
-        icon.setAttribute('class', 'placeIcon');
-        icon.setAttribute('className', 'placeIcon');
-        var name = document.createTextNode(result.name);
-        iconTd.appendChild(icon);
-        nameTd.appendChild(name);
-        tr.appendChild(iconTd);
-        tr.appendChild(nameTd);
-        results.appendChild(tr);
+      
       }
 
       function clearResults() {
@@ -320,8 +327,6 @@
         }
       }
 
-      // Get the place details for a hotel. Show the information in an info window,
-      // anchored on the marker for the hotel that the user selected.
       function showInfoWindow() {
         var marker = this;
         places.getDetails({placeId: marker.placeResult.place_id},
@@ -350,26 +355,6 @@
           document.getElementById('iw-phone-row').style.display = 'none';
         }
 
-        // Assign a five-star rating to the hotel, using a black star ('&#10029;')
-        // to indicate the rating the hotel has earned, and a white star ('&#10025;')
-        // for the rating points not achieved.
-        if (place.rating) {
-          var ratingHtml = '';
-          for (var i = 0; i < 5; i++) {
-            if (place.rating < (i + 0.5)) {
-              ratingHtml += '&#10025;';
-            } else {
-              ratingHtml += '&#10029;';
-            }
-          document.getElementById('iw-rating-row').style.display = '';
-          document.getElementById('iw-rating').innerHTML = ratingHtml;
-          }
-        } else {
-          document.getElementById('iw-rating-row').style.display = 'none';
-        }
-
-        // The regexp isolates the first part of the URL (domain plus subdomain)
-        // to give a short URL for displaying in the info window.
         if (place.website) {
           var fullUrl = place.website;
           var website = hostnameRegexp.exec(place.website);
@@ -384,7 +369,7 @@
         }
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDj-kiFA-8-6h1MGoVU2quVkHPFJSmuhg &libraries=places&callback=initMap"
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpE2YT1oFB6lOSNETVglqinveVTq7jXDU&libraries=places&callback=initMap"
         async defer></script>
   </body>
 </html>

@@ -1,8 +1,11 @@
+require('dotenv').config()
+
 /** Mongoclient module */
 const MongoClient = require('mongodb').MongoClient;
 
 /** mongodb database url */
-const url = 'mongodb://Nick.s:student@ds014388.mlab.com:14388/grocery_list_project'
+const url = process.env.DB_API
+const db_client = process.env.DB
 
 /** Verifiys the that the inputted email and password are correct format and match the ones in the database.
  * @param {string} email The users email address
@@ -65,7 +68,7 @@ function connectDB(callback) {
         if(err) {
             throw err;
         } else {
-        	var db = client.db('grocery_list_project')
+        	var db = client.db(db_client)
 		    var collection = db.collection('Users')
 		    callback(collection, db, client)
         }
@@ -302,6 +305,19 @@ function deleteItemDB(email, list, category, item, callback) {
 	});
 }
 
+/*
+function renameListDB(newname, email){
+  connectDB((collection, db, client) => {
+      //readFile(email);
+	
+		collection.update({email: email},{$set:{name:newname}});
+		//updateDB(email, user);
+
+		callback('success');
+	});
+}
+*/
+    
 module.exports = {
 	login,
 	signup,
@@ -318,5 +334,25 @@ module.exports = {
     addCategoryDB,
     deleteCategoryDB,
     addItemDB,
-    deleteItemDB
+    addListDB,
+    deleteItemDB,
+    deleteListDB
+
 }
+
+
+	
+
+
+// henrys unittest example to me (nick)
+// var obj = {
+// 	id:expect.anything(),
+// 	name:expect.anything()
+// }
+
+// test("dbRead", (done)=>{
+// 	readFile({data:"stuff"}, (err, data)=>{
+// 		expect(data).toBe("failed");
+// 		expect(data).toEqual(obj);
+// 		done();
+// 	})

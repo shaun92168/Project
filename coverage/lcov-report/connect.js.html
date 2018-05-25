@@ -650,15 +650,15 @@ function <span class="fstat-no" title="function not covered" >login(</span>email
  * @param {callback} callback Sends a callback
  */
 function connectDB(callback) {
-	MongoClient.connect(url, <span class="fstat-no" title="function not covered" >fu</span>nction(err, client) {
+  MongoClient.connect(url, <span class="fstat-no" title="function not covered" >fu</span>nction(err, client) {
 <span class="cstat-no" title="statement not covered" >        if(err) {</span>
 <span class="cstat-no" title="statement not covered" >            throw err;</span>
         } else {
-        	var db = <span class="cstat-no" title="statement not covered" >client.db('grocery_list_project')</span>
-		    var collection = <span class="cstat-no" title="statement not covered" >db.collection('Users')</span>
-<span class="cstat-no" title="statement not covered" >		    callback(collection, db, client)</span>
+          var db = <span class="cstat-no" title="statement not covered" >client.db('grocery_list_project')</span>
+        var collection = <span class="cstat-no" title="statement not covered" >db.collection('Users')</span>
+<span class="cstat-no" title="statement not covered" >        callback(collection, db, client)</span>
         }
-	});
+  });
 }
 &nbsp;
 /** Finds the list's index number in the data file and returns it.
@@ -713,18 +713,18 @@ function <span class="fstat-no" title="function not covered" >getItemIndex(</spa
  * @param {callback} callback Sends a callback
  */
 function <span class="fstat-no" title="function not covered" >readFile(</span>email, callback){
-<span class="cstat-no" title="statement not covered" >	connectDB(<span class="fstat-no" title="function not covered" >fu</span>nction(collection, db, client) {</span>
-<span class="cstat-no" title="statement not covered" >		collection.findOne({email: email}, <span class="fstat-no" title="function not covered" >fu</span>nction(err, user) {</span>
-<span class="cstat-no" title="statement not covered" >			if (err) {</span>
-<span class="cstat-no" title="statement not covered" >				throw err;</span>
-			} else <span class="cstat-no" title="statement not covered" >if (!user) {</span>
-<span class="cstat-no" title="statement not covered" >				callback('failed');</span>
-			} else {
-<span class="cstat-no" title="statement not covered" >				callback(user);</span>
-			}
-<span class="cstat-no" title="statement not covered" >			client.close();</span>
-		});
-	});
+<span class="cstat-no" title="statement not covered" >  connectDB(<span class="fstat-no" title="function not covered" >fu</span>nction(collection, db, client) {</span>
+<span class="cstat-no" title="statement not covered" >    collection.findOne({email: email}, <span class="fstat-no" title="function not covered" >fu</span>nction(err, user) {</span>
+<span class="cstat-no" title="statement not covered" >      if (err) {</span>
+<span class="cstat-no" title="statement not covered" >        throw err;</span>
+      } else <span class="cstat-no" title="statement not covered" >if (!user) {</span>
+<span class="cstat-no" title="statement not covered" >        callback('failed');</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        callback(user);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      client.close();</span>
+    });
+  });
 }
 &nbsp;
 /** replaces the old database document with a new one.
@@ -732,10 +732,10 @@ function <span class="fstat-no" title="function not covered" >readFile(</span>em
  * @param {JSON} data The data to be uploaded to the database
  */
 function <span class="fstat-no" title="function not covered" >updateDB(</span>email, data) {
-<span class="cstat-no" title="statement not covered" >	connectDB(<span class="fstat-no" title="function not covered" >(c</span>ollection, db, client) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >		collection.replaceOne({email: email}, data);</span>
-<span class="cstat-no" title="statement not covered" >	  	client.close();</span>
-	});
+<span class="cstat-no" title="statement not covered" >  connectDB(<span class="fstat-no" title="function not covered" >(c</span>ollection, db, client) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    collection.replaceOne({email: email}, data);</span>
+<span class="cstat-no" title="statement not covered" >      client.close();</span>
+  });
 }
 &nbsp;
 /** Adds a new user document to the database and returns a callback either 'error' or 'success'
@@ -744,17 +744,17 @@ function <span class="fstat-no" title="function not covered" >updateDB(</span>em
  * @param {callback} callback Sends a callback
  */
 function <span class="fstat-no" title="function not covered" >addUserDB(</span>record, table, callback) {
-<span class="cstat-no" title="statement not covered" >	connectDB(<span class="fstat-no" title="function not covered" >fu</span>nction(collection, db, client) {</span>
-<span class="cstat-no" title="statement not covered" >		db.collection(table).insertOne(record, <span class="fstat-no" title="function not covered" >fu</span>nction(err, res) {</span>
-<span class="cstat-no" title="statement not covered" >		    if (err){</span>
-<span class="cstat-no" title="statement not covered" >		        callback("error");</span>
-<span class="cstat-no" title="statement not covered" >		        throw err;</span>
-		    } else {
-<span class="cstat-no" title="statement not covered" >		        callback("success");</span>
-		    }
-<span class="cstat-no" title="statement not covered" >		    client.close();</span>
-   		});
-	});
+<span class="cstat-no" title="statement not covered" >  connectDB(<span class="fstat-no" title="function not covered" >fu</span>nction(collection, db, client) {</span>
+<span class="cstat-no" title="statement not covered" >    db.collection(table).insertOne(record, <span class="fstat-no" title="function not covered" >fu</span>nction(err, res) {</span>
+<span class="cstat-no" title="statement not covered" >        if (err){</span>
+<span class="cstat-no" title="statement not covered" >            callback("error");</span>
+<span class="cstat-no" title="statement not covered" >            throw err;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            callback("success");</span>
+        }
+<span class="cstat-no" title="statement not covered" >        client.close();</span>
+      });
+  });
 }
 &nbsp;
 /** Deletes a user document from the database and returns a callback with either 'error' or '1 document deleted'
@@ -763,18 +763,18 @@ function <span class="fstat-no" title="function not covered" >addUserDB(</span>r
  * @param {callback} callback Sends a callback
  */
 function deleteUserDB(record, table, callback) {
-	connectDB(<span class="fstat-no" title="function not covered" >fu</span>nction(collection, db, client) {
+  connectDB(<span class="fstat-no" title="function not covered" >fu</span>nction(collection, db, client) {
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	    db.collection(table).deleteOne(record, <span class="fstat-no" title="function not covered" >fu</span>nction(err, res) {</span>
-<span class="cstat-no" title="statement not covered" >	        if (err){</span>
-<span class="cstat-no" title="statement not covered" >	            callback("error");</span>
-<span class="cstat-no" title="statement not covered" >	            throw err;</span>
-	        } else {
-<span class="cstat-no" title="statement not covered" >	            callback("success");</span>
-	        }
-<span class="cstat-no" title="statement not covered" >	        client.close();</span>
-  		});
-	});
+<span class="cstat-no" title="statement not covered" >      db.collection(table).deleteOne(record, <span class="fstat-no" title="function not covered" >fu</span>nction(err, res) {</span>
+<span class="cstat-no" title="statement not covered" >          if (err){</span>
+<span class="cstat-no" title="statement not covered" >              callback("error");</span>
+<span class="cstat-no" title="statement not covered" >              throw err;</span>
+          } else {
+<span class="cstat-no" title="statement not covered" >              callback("success");</span>
+          }
+<span class="cstat-no" title="statement not covered" >          client.close();</span>
+      });
+  });
 }
 &nbsp;
 /** Adds a new list to a users file and saves it to the database 
@@ -782,10 +782,10 @@ function deleteUserDB(record, table, callback) {
  * @param {string} list The new lists name
  */
 function <span class="fstat-no" title="function not covered" >addListDB(</span>email, list) {
-<span class="cstat-no" title="statement not covered" >	readFile(email, <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >		user.lists.push({name: list});</span>
-<span class="cstat-no" title="statement not covered" >		updateDB(email, user);</span>
-	});
+<span class="cstat-no" title="statement not covered" >  readFile(email, <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    user.lists.push({name: list});</span>
+<span class="cstat-no" title="statement not covered" >    updateDB(email, user);</span>
+  });
 }
 &nbsp;
 /** deletes a list from the users file and saves the change to the database
@@ -793,12 +793,12 @@ function <span class="fstat-no" title="function not covered" >addListDB(</span>e
  * @param {string} list The name of the list to be deleted
  */
 function <span class="fstat-no" title="function not covered" >deleteListDB(</span>email, list, callback) {
-<span class="cstat-no" title="statement not covered" >	readFile(email, <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >		listIndex = getListIndex(list, user)</span>
-<span class="cstat-no" title="statement not covered" >		user.lists.splice(listIndex)</span>
-<span class="cstat-no" title="statement not covered" >		updateDB(email, user)</span>
-<span class="cstat-no" title="statement not covered" >		callback('success')</span>
-	})
+<span class="cstat-no" title="statement not covered" >  readFile(email, <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    listIndex = getListIndex(list, user)</span>
+<span class="cstat-no" title="statement not covered" >    user.lists.splice(listIndex)</span>
+<span class="cstat-no" title="statement not covered" >    updateDB(email, user)</span>
+<span class="cstat-no" title="statement not covered" >    callback('success')</span>
+  })
 }
 &nbsp;
 /** Adds a category to the specified list and saves it to database
@@ -807,15 +807,15 @@ function <span class="fstat-no" title="function not covered" >deleteListDB(</spa
  * @param {string} categoryName The name for the category you want to add
  */
 function <span class="fstat-no" title="function not covered" >addCategoryDB(</span>email, list, category, callback) {
-<span class="cstat-no" title="statement not covered" >	readFile(email, <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
-		var listIndex = <span class="cstat-no" title="statement not covered" >getListIndex(list, user)</span>
-		var categoryObj = <span class="cstat-no" title="statement not covered" >{"name": category, "items": [] };</span>
+<span class="cstat-no" title="statement not covered" >  readFile(email, <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
+    var listIndex = <span class="cstat-no" title="statement not covered" >getListIndex(list, user)</span>
+    var categoryObj = <span class="cstat-no" title="statement not covered" >{"name": category, "items": [] };</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		user.lists[listIndex].categories.push(categoryObj);</span>
-<span class="cstat-no" title="statement not covered" >		updateDB(email, user)</span>
+<span class="cstat-no" title="statement not covered" >    user.lists[listIndex].categories.push(categoryObj);</span>
+<span class="cstat-no" title="statement not covered" >    updateDB(email, user)</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		callback('success')</span>
-	});
+<span class="cstat-no" title="statement not covered" >    callback('success')</span>
+  });
 }
 &nbsp;
 /** Deletes a users specified category from the database.
@@ -826,13 +826,13 @@ function <span class="fstat-no" title="function not covered" >addCategoryDB(</sp
  */
 function <span class="fstat-no" title="function not covered" >deleteCategoryDB(</span>email, list, category, callback) {
 <span class="cstat-no" title="statement not covered" >    readFile(email, <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
-    	var listIndex = <span class="cstat-no" title="statement not covered" >getListIndex(list, user);</span>
-    	var categoryIndex = <span class="cstat-no" title="statement not covered" >getCategoryIndex(list, category, user);</span>
+      var listIndex = <span class="cstat-no" title="statement not covered" >getListIndex(list, user);</span>
+      var categoryIndex = <span class="cstat-no" title="statement not covered" >getCategoryIndex(list, category, user);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    	user.lists[listIndex].categories.splice(categoryIndex,1);</span>
-<span class="cstat-no" title="statement not covered" >   		updateDB(email, user);</span>
+<span class="cstat-no" title="statement not covered" >      user.lists[listIndex].categories.splice(categoryIndex,1);</span>
+<span class="cstat-no" title="statement not covered" >      updateDB(email, user);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >   		callback('success');</span>
+<span class="cstat-no" title="statement not covered" >      callback('success');</span>
     });
 }
 &nbsp;
@@ -844,15 +844,15 @@ function <span class="fstat-no" title="function not covered" >deleteCategoryDB(<
  * @param {callback} callback Sends a callback
  */
 function <span class="fstat-no" title="function not covered" >addItemDB(</span>email, list, category, item, callback) {
-<span class="cstat-no" title="statement not covered" >	readFile(email, <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
-		var listIndex = <span class="cstat-no" title="statement not covered" >getListIndex(list, user);</span>
-		var categoryIndex = <span class="cstat-no" title="statement not covered" >getCategoryIndex(list, category, user);</span>
+<span class="cstat-no" title="statement not covered" >  readFile(email, <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
+    var listIndex = <span class="cstat-no" title="statement not covered" >getListIndex(list, user);</span>
+    var categoryIndex = <span class="cstat-no" title="statement not covered" >getCategoryIndex(list, category, user);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		user.lists[listIndex].categories[categoryIndex].items.push(item)</span>
-<span class="cstat-no" title="statement not covered" >		updateDB(email, user);</span>
+<span class="cstat-no" title="statement not covered" >    user.lists[listIndex].categories[categoryIndex].items.push(item)</span>
+<span class="cstat-no" title="statement not covered" >    updateDB(email, user);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		callback('success');</span>
-	});
+<span class="cstat-no" title="statement not covered" >    callback('success');</span>
+  });
 }
 &nbsp;
 /** Deletes an item from the entered list, and category, from the database
@@ -863,26 +863,26 @@ function <span class="fstat-no" title="function not covered" >addItemDB(</span>e
  * @param {callback} callback Sends a callback
  */
 function <span class="fstat-no" title="function not covered" >deleteItemDB(</span>email, list, category, item, callback) {
-<span class="cstat-no" title="statement not covered" >	readFile(email, <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
-		var listIndex = <span class="cstat-no" title="statement not covered" >getListIndex(list, user);</span>
-		var categoryIndex = <span class="cstat-no" title="statement not covered" >getCategoryIndex(list, category, user);</span>
-		var itemIndex= <span class="cstat-no" title="statement not covered" >getItemIndex(list, category, item, user)</span>
+<span class="cstat-no" title="statement not covered" >  readFile(email, <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
+    var listIndex = <span class="cstat-no" title="statement not covered" >getListIndex(list, user);</span>
+    var categoryIndex = <span class="cstat-no" title="statement not covered" >getCategoryIndex(list, category, user);</span>
+    var itemIndex= <span class="cstat-no" title="statement not covered" >getItemIndex(list, category, item, user)</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		user.lists[listIndex].categories[categoryIndex].items.splice(itemIndex, 1);</span>
-<span class="cstat-no" title="statement not covered" >		updateDB(email, user);</span>
+<span class="cstat-no" title="statement not covered" >    user.lists[listIndex].categories[categoryIndex].items.splice(itemIndex, 1);</span>
+<span class="cstat-no" title="statement not covered" >    updateDB(email, user);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		callback('success');</span>
-	});
+<span class="cstat-no" title="statement not covered" >    callback('success');</span>
+  });
 }
 &nbsp;
 module.exports = {
-	login,
-	getListIndex,
-	getCategoryIndex,
-	getItemIndex,
-	readFile,
-	updateDB,
-	addUserDB,
+  login,
+  getListIndex,
+  getCategoryIndex,
+  getItemIndex,
+  readFile,
+  updateDB,
+  addUserDB,
     deleteUserDB,
     addListDB,
     deleteListDB,
@@ -892,21 +892,21 @@ module.exports = {
     deleteItemDB
 }
 &nbsp;
-	
+  
 &nbsp;
 &nbsp;
 // henrys unittest example to me (nick)
 // var obj = {
-// 	id:expect.anything(),
-// 	name:expect.anything()
+//  id:expect.anything(),
+//  name:expect.anything()
 // }
 &nbsp;
 // test("dbRead", (done)=&gt;{
-// 	readFile({data:"stuff"}, (err, data)=&gt;{
-// 		expect(data).toBe("failed");
-// 		expect(data).toEqual(obj);
-// 		done();
-// 	})
+//  readFile({data:"stuff"}, (err, data)=&gt;{
+//    expect(data).toBe("failed");
+//    expect(data).toEqual(obj);
+//    done();
+//  })
 // })</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

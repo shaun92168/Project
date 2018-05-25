@@ -68,7 +68,6 @@ ul {
     background-color: #d4d4d4;
     border-radius: 10px;
     opacity: 0.95;
-    
 }
 button {
     background-color: #315EDC;
@@ -98,4 +97,35 @@ hr {
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.item {
+    padding-bottom: 3%;
+}
+
+.deleteItem {
+    position: absolute;
+    right: 5%;
+    background-color: red;
+}
+
+#delCategory {
+    background-color: red;
+}
+
+#chooseCategory {
+    width: 180px;
+    height: 30px;
+    background-color: #315EDC;
+    border: 0.5px solid #002280;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    opacity: 0.7;
+    border-radius: 5px;
 }
