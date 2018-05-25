@@ -45,6 +45,20 @@ app.use(session({
     activeDuration: 1 * 30 * 60 * 1000
 }));
 
+
+/** Checks to see if the session is still active, if it isnt it redirects to '/'
+ * @param {JSON} request
+ * @param {JSON} response
+ * @param {} next
+ */
+function sessionCheck(req, res, next) {
+    if (req.session && req.session.user) {
+        next()
+    } else {
+        res.redirect('/')
+    }
+}
+
 /**
  * sends the username and password to the DB for validation, if true it redirects to the homepage, 
  * else it renders the login page with a error message
@@ -107,7 +121,7 @@ app.get('/signup', (request, response) => {
     response.render('signup.hbs')
 });
 
-app.get('/maps',(request,response)=>{
+app.get('/maps', sessionCheck, (request,response)=>{
     response.render('maps.hbs')
 });
 
@@ -118,18 +132,14 @@ app.get('/maps',(request,response)=>{
  * @param {JSON} request
  * @param {JSON} response
  */
-app.get('/homePage', function(req, res) {
-    if(req.session && req.session.user) {
-        getDB.readFile(req.session.user.email, (user) => {
-            req.session.user = user
-            res.render('home.hbs', {
-                username: req.session.user.username,
-                lists: req.session.user.lists
-            });
+app.get('/homePage', sessionCheck, (req, res) => {
+    getDB.readFile(req.session.user.email, (user) => {
+        req.session.user = user
+        res.render('home.hbs', {
+            username: req.session.user.username,
+            lists: req.session.user.lists
         });
-    } else {
-        res.redirect('/');
-    }
+    });
 });
 
 /**
@@ -273,19 +283,15 @@ app.post('/deleteItem', (req, res) => {
  * @param {JSON} request
  * @param {JSON} response
  */
-app.post('/listPage', function(req, res) {
-    if(req.session && req.session.user) {
-        getDB.readFile(req.session.user.email, (user) => {
-            req.session.user = user
-            req.session.user.currentList = req.body.radioList
-            listIndex = getDB.getListIndex(req.body.radioList, req.session.user)
-            res.render('list.hbs', {
-                list: req.session.user.lists[listIndex]
-            });
+app.post('/listPage', sessionCheck, (req, res) => {
+    getDB.readFile(req.session.user.email, (user) => {
+        req.session.user = user
+        req.session.user.currentList = req.body.radioList
+        listIndex = getDB.getListIndex(req.body.radioList, req.session.user)
+        res.render('list.hbs', {
+            list: req.session.user.lists[listIndex]
         });
-    } else {
-        res.redirect('/');
-    }
+    });
 });
 
 /**
@@ -295,7 +301,7 @@ app.post('/listPage', function(req, res) {
  * @param {JSON} request
  * @param {JSON} response
  */
-app.get('/account', (request, response) => {
+app.get('/account', sessionCheck, (request, response) => {
     response.render('accountsettings.hbs')
 });
 
@@ -306,7 +312,7 @@ app.get('/account', (request, response) => {
  * @param {JSON} request
  * @param {JSON} response
  */
-app.get('/about', (request, response) => {
+app.get('/about', sessionCheck, (request, response) => {
     response.render('about.hbs')
 });
 
